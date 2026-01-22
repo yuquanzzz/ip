@@ -25,6 +25,11 @@ class Todo extends Task {
     Todo(String description) {
         super(description);
     }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
 }
 
 class Deadline extends Task {
@@ -37,7 +42,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }
 
@@ -51,6 +56,6 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + eventTime + ")";
+        return "[E]" + super.toString() + " (at: " + eventTime + ")";
     }
 }
