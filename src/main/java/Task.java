@@ -21,16 +21,16 @@ abstract class Task {
     }
 }
 
-class TodoTask extends Task {
-    TodoTask(String description) {
+class Todo extends Task {
+    Todo(String description) {
         super(description);
     }
 }
 
-class DeadlineTask extends Task {
+class Deadline extends Task {
     private final String deadline;
 
-    DeadlineTask(String description, String deadline) {
+    Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -41,10 +41,10 @@ class DeadlineTask extends Task {
     }
 }
 
-class EventTask extends Task {
+class Event extends Task {
     private final String eventTime;
 
-    EventTask(String description, String eventTime) {
+    Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
