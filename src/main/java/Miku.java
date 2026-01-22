@@ -50,11 +50,11 @@ public class Miku {
                     System.out.println("\t____________________________________________________________");
                     break;
                 case UNMARK:
-                    markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    todolist.get(markIndex).markAsUndone();
+                    int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    todolist.get(unmarkIndex).markAsUndone();
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tNo worries! You've unmarked a task. Keep going! (´꒳`)♡");
-                    System.out.println("\t\t" + todolist.get(markIndex).toString());
+                    System.out.println("\t\t" + todolist.get(unmarkIndex).toString());
                     System.out.println("\t____________________________________________________________");
                     break;
                 case BYE:
