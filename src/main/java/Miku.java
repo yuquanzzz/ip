@@ -3,13 +3,16 @@ import java.util.*;
 public class Miku {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Task> todolist = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
 
         Map<String, Command> commands = Map.of(
             "list", Command.LIST,
             "bye", Command.BYE,
             "mark", Command.MARK,
-            "unmark", Command.UNMARK
+            "unmark", Command.UNMARK,
+            "todo", Command.TODO,
+            "deadline", Command.DEADLINE,
+            "event", Command.EVENT
         );
 
         // Display welcome message
@@ -23,11 +26,11 @@ public class Miku {
         // Echos back user input until "bye" is entered
         boolean exit = false;
         while (!exit) {
-            String input = sc.nextLine();
-            Command command = commands.getOrDefault(input.split(" ")[0], Command.ADD);
+            String[] input = sc.nextLine().split(" ", 2);
+            Command command = commands.get(input[0]);
             switch (command) {
                 case LIST:
-                    if (todolist.isEmpty()) {
+                    if (taskList.isEmpty()) {
                         System.out.println("\t____________________________________________________________");
                         System.out.println("\tYour to-do list is currently empty! " +
                                 "Let's add some tasks to get started! (´꒳`)♡");
@@ -36,36 +39,60 @@ public class Miku {
                     }
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tHere are the tasks in your to-do list:");
-                    for (int i = 1; i <= todolist.size(); i++) {
-                        System.out.println("\t" + (i) + ". " + todolist.get(i-1));
+                    for (int i = 1; i <= taskList.size(); i++) {
+                        System.out.println("\t" + (i) + ". " + taskList.get(i-1));
                     }
                     System.out.println("\t____________________________________________________________");
                     break;
+                case TODO:
+                    Task todo = new Todo(input[1]);
+                    taskList.add(todo);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tI've added this task:");
+                    System.out.println("\t\t" + todo);
+                    System.out.println("\tNow you have " + taskList.size() + " tasks in the list. Keep it up! (´꒳`)♡");
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case DEADLINE:
+                    String by = input[1].substring(input[1].indexOf("/by ") + 4);
+                    Task deadline = new Deadline(input[1].substring(0, input[1].indexOf("/by ") - 1), by);
+                    taskList.add(deadline);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tI've added this task:");
+                    System.out.println("\t\t" + deadline);
+                    System.out.println("\tNow you have " + taskList.size() + " tasks in the list. Keep it up! (´꒳`)♡");
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case EVENT:
+                    String from = input[1].substring(input[1].indexOf("/from ") + 6, input[1].indexOf(" /to "));
+                    String to = input[1].substring(input[1].indexOf("/to ") + 4);
+                    Task event = new Event(input[1].substring(0, input[1].indexOf("/from ") - 1), from, to);
+                    taskList.add(event);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tI've added this task:");
+                    System.out.println("\t\t" + event);
+                    System.out.println("\tNow you have " + taskList.size() + " tasks in the list. Keep it up! (´꒳`)♡");
+                    System.out.println("\t____________________________________________________________");
+                    break;
                 case MARK:
-                    int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    todolist.get(markIndex).markAsDone();
+                    int markIndex = Integer.parseInt(input[1]) - 1;
+                    taskList.get(markIndex).markAsDone();
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tGreat job! You've marked a task as done! (´꒳`)♡");
-                    System.out.println("\t\t" + todolist.get(markIndex).toString());
+                    System.out.println("\t\t" + taskList.get(markIndex).toString());
                     System.out.println("\t____________________________________________________________");
                     break;
                 case UNMARK:
-                    int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    todolist.get(unmarkIndex).markAsUndone();
+                    int unmarkIndex = Integer.parseInt(input[1]) - 1;
+                    taskList.get(unmarkIndex).markAsUndone();
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tNo worries! You've unmarked a task. Keep going! (´꒳`)♡");
-                    System.out.println("\t\t" + todolist.get(unmarkIndex).toString());
+                    System.out.println("\t\t" + taskList.get(unmarkIndex).toString());
                     System.out.println("\t____________________________________________________________");
                     break;
                 case BYE:
                     sc.close();
                     exit = true;
-                    break;
-                case ADD:
-                    todolist.add(new Task(input));
-                    System.out.println("\t____________________________________________________________");
-                    System.out.println("\tadded: " + input);
-                    System.out.println("\t____________________________________________________________");
                     break;
             }
         }
@@ -82,8 +109,10 @@ public class Miku {
     enum Command {
         LIST,
         BYE,
-        ADD,
         MARK,
-        UNMARK
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
     }
 }
