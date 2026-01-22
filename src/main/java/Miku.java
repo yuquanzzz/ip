@@ -1,8 +1,14 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Miku {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        List<String> todolist = new ArrayList<>();
+
+        Map<String, Command> commands = Map.of(
+            "list", Command.LIST,
+            "bye", Command.BYE
+        );
 
         // Display welcome message
         System.out.println("\t____________________________________________________________");
@@ -13,16 +19,50 @@ public class Miku {
         System.out.println("\t____________________________________________________________");
 
         // Echos back user input until "bye" is entered
-        String input = "";
-        while (!(input = sc.nextLine()).equals("bye")) {
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t" + input);
-            System.out.println("\t____________________________________________________________");
+        boolean exit = false;
+        while (!exit) {
+            String input = sc.nextLine();
+            Command command = commands.getOrDefault(input, Command.ADD);
+            switch (command) {
+                case LIST:
+                    if (todolist.isEmpty()) {
+                        System.out.println("\t____________________________________________________________");
+                        System.out.println("\tYour to-do list is currently empty! " +
+                                "Let's add some tasks to get started! (＾▽＾)");
+                        System.out.println("\t____________________________________________________________");
+                        break;
+                    }
+                    System.out.println("\t____________________________________________________________");
+                    for (int i = 1; i <= todolist.size(); i++) {
+                        System.out.println("\t" + (i) + ". " + todolist.get(i-1));
+                    }
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case BYE:
+                    sc.close();
+                    exit = true;
+                    break;
+                case ADD:
+                    todolist.add(input);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tadded: " + input);
+                    System.out.println("\t____________________________________________________________");
+                    break;
+            }
         }
 
         // Display goodbye message
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("\t「The final note has been played!」");
+        System.out.println("\tOur frequencies were perfectly in sync today! (≧∇≦)/");
+        System.out.println("\tDon't work too hard while I'm gone. I'll be practicing my scales until you return!");
+        System.out.println("\tGoodbye for now!");
         System.out.println("\t____________________________________________________________");
+    }
+
+    enum Command {
+        LIST,
+        BYE,
+        ADD
     }
 }
