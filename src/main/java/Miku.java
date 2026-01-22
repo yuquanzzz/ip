@@ -3,11 +3,13 @@ import java.util.*;
 public class Miku {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> todolist = new ArrayList<>();
+        List<Task> todolist = new ArrayList<>();
 
         Map<String, Command> commands = Map.of(
             "list", Command.LIST,
-            "bye", Command.BYE
+            "bye", Command.BYE,
+            "mark", Command.MARK,
+            "unmark", Command.UNMARK
         );
 
         // Display welcome message
@@ -22,20 +24,37 @@ public class Miku {
         boolean exit = false;
         while (!exit) {
             String input = sc.nextLine();
-            Command command = commands.getOrDefault(input, Command.ADD);
+            Command command = commands.getOrDefault(input.split(" ")[0], Command.ADD);
             switch (command) {
                 case LIST:
                     if (todolist.isEmpty()) {
                         System.out.println("\t____________________________________________________________");
                         System.out.println("\tYour to-do list is currently empty! " +
-                                "Let's add some tasks to get started! (＾▽＾)");
+                                "Let's add some tasks to get started! (´꒳`)♡");
                         System.out.println("\t____________________________________________________________");
                         break;
                     }
                     System.out.println("\t____________________________________________________________");
+                    System.out.println("\tHere are the tasks in your to-do list:");
                     for (int i = 1; i <= todolist.size(); i++) {
                         System.out.println("\t" + (i) + ". " + todolist.get(i-1));
                     }
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case MARK:
+                    int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    todolist.get(markIndex).markAsDone();
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tGreat job! You've marked a task as done! (´꒳`)♡");
+                    System.out.println("\t\t" + todolist.get(markIndex).toString());
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case UNMARK:
+                    markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                    todolist.get(markIndex).markAsUndone();
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\tNo worries! You've unmarked a task. Keep going! (´꒳`)♡");
+                    System.out.println("\t\t" + todolist.get(markIndex).toString());
                     System.out.println("\t____________________________________________________________");
                     break;
                 case BYE:
@@ -43,7 +62,7 @@ public class Miku {
                     exit = true;
                     break;
                 case ADD:
-                    todolist.add(input);
+                    todolist.add(new Task(input));
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tadded: " + input);
                     System.out.println("\t____________________________________________________________");
@@ -63,6 +82,8 @@ public class Miku {
     enum Command {
         LIST,
         BYE,
-        ADD
+        ADD,
+        MARK,
+        UNMARK
     }
 }
