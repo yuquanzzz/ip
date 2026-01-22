@@ -47,15 +47,17 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    private final String eventTime;
+    private final String fromTime;
+    private final String toTime;
 
-    Event(String description, String eventTime) {
+    Event(String description, String fromTime, String toTime) {
         super(description);
-        this.eventTime = eventTime;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventTime + ")";
+        return "[E]" + super.toString() + " (from: " + fromTime + " to: " + toTime + ")";
     }
 }
