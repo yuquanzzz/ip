@@ -55,4 +55,10 @@ public class Ui {
         }
         System.out.println(LINE);
     }
+
+    public void showError(String message) {
+        System.out.println(LINE);
+        System.out.println("\t" + message);
+        System.out.println(LINE);
+    }
 }
