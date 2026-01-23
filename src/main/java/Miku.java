@@ -40,12 +40,19 @@ public class Miku {
                             throw new MikuException("Please specify which task to unmark!");
                         }
                         handleUnmark(parsedInput[1]);
+                        break; 
+                    case DELETE:
+                        if (parsedInput.length < 2) {
+                            throw new MikuException("Please specify which task to delete!");
+                        }
+                        handleDeleteTask(parsedInput[1]);
                         break;
                     case BYE:
                         exit = true;
                         break;
                     case UNKNOWN:
-                        throw new MikuException("I'm sorry, I didn't quite catch that command. Please try again with a valid command.");
+                        throw new MikuException("I'm sorry, I didn't quite catch that command. " +
+                                "Please try again with a valid command.");
                 }
             } catch (MikuException e) {
                 ui.showError(e.getMessage());
@@ -64,6 +71,13 @@ public class Miku {
         Task task = Parser.parseTask(command, arguments);
         taskList.addTask(task);
         ui.showTaskAdded(task, taskList.size());
+    }
+
+    private void handleDeleteTask(String indexString) throws MikuException {
+        int index = Parser.parseTaskIndex(indexString);
+        Task task = taskList.getTask(index);
+        taskList.deleteTask(index);
+        ui.showTaskDeleted(task, taskList.size());
     }
 
     private void handleMark(String indexString) throws MikuException {

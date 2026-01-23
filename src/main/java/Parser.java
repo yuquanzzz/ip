@@ -10,6 +10,7 @@ public class Parser {
             case "todo" -> Command.TODO;
             case "deadline" -> Command.DEADLINE;
             case "event" -> Command.EVENT;
+            case "delete" -> Command.DELETE;
             default -> Command.UNKNOWN;
         };
     }
@@ -93,6 +94,7 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
+        DELETE,
         UNKNOWN
     }
 }

@@ -28,6 +28,14 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public void showTaskDeleted(Task task, int taskCount) {
+        System.out.println(LINE);
+        System.out.println("\tOk! You've deleted a task. Keep going!");
+        System.out.println("\t  " + task);
+        System.out.println("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
+        System.out.println(LINE);
+    }
+
     public void showTaskMarked(Task task) {
         System.out.println(LINE);
         System.out.println("\tGreat job! You've marked a task as done!");
