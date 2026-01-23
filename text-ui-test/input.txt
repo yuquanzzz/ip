@@ -1,0 +1,31 @@
+list
+todo read book
+todo return book
+deadline submit report /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+list
+mark 1
+mark 2
+list
+unmark 1
+list
+todo
+deadline
+deadline finish homework
+deadline  /by 
+deadline finish homework /by 
+event
+event conference /to 5pm
+event conference /from 10am
+event  /from 10am /to 5pm
+event conference /from  /to 5pm
+event conference /from 10am /to 
+mark
+unmark
+mark -1
+unmark -1
+mark 999
+unmark 999
+xyz
+delete 1
+bye
