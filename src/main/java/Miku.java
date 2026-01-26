@@ -17,7 +17,7 @@ public class Miku {
         while (!exit) {
             try {
                 String input = sc.nextLine();
-                Parser.Command command = Parser.parseCommand(input);
+                Command command = Parser.parseCommand(input);
                 String[] parsedInput = Parser.parseInput(input);
 
                 switch (command) {
@@ -67,7 +67,7 @@ public class Miku {
         ui.showTaskList(taskList.getTasks());
     }
 
-    private void handleAddTask(Parser.Command command, String arguments) throws MikuException {
+    private void handleAddTask(Command command, String arguments) throws MikuException {
         Task task = Parser.parseTask(command, arguments);
         taskList.addTask(task);
         ui.showTaskAdded(task, taskList.size());

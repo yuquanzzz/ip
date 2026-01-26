@@ -85,16 +85,4 @@ public class Parser {
         }
         return new Event(description, from, to);
     }
-
-    enum Command {
-        LIST,
-        BYE,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        UNKNOWN
-    }
 }
