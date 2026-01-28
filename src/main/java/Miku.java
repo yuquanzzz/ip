@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Miku {
+    static final String STORAGE_DIR = "data/";
     private final TaskList taskList;
 
     public Miku() {
-        this.taskList = Storage.loadTaskList();
+        this.taskList = Storage.loadTaskList(STORAGE_DIR);
     }
 
     public void run() {
@@ -57,7 +58,7 @@ public class Miku {
             }
         }
         
-        Storage.saveTaskList(taskList);
+        Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showGoodbye();
         sc.close();
     }
@@ -69,6 +70,7 @@ public class Miku {
     private void handleAddTask(Command command, String arguments) throws MikuException {
         Task task = Parser.parseTask(command, arguments);
         taskList.addTask(task);
+        Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskAdded(task, taskList.size());
     }
 
@@ -76,18 +78,21 @@ public class Miku {
         int index = Parser.parseTaskIndex(indexString);
         Task task = taskList.getTask(index);
         taskList.deleteTask(index);
+        Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskDeleted(task, taskList.size());
     }
 
     private void handleMark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.markTask(index);
+        Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskMarked(taskList.getTask(index));
     }
 
     private void handleUnmark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.unmarkTask(index);
+        Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskUnmarked(taskList.getTask(index));
     }
 

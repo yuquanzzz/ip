@@ -6,16 +6,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage {
-    private static final Path PATH = Paths.get("data", "taskList.ser");
-
-    public static TaskList loadTaskList() {
+    
+    public static TaskList loadTaskList(String storageDir) {
+        Path path = Paths.get(storageDir, "taskList.ser");
         // no existing taskList, creating new taskList
-        if (Files.notExists(PATH)) {
+        if (Files.notExists(path)) {
             return new TaskList();
         }
         
         // try to load existing taskList
-        try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(PATH))) {
+        try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(path))) {
             Object obj = ois.readObject();
             // check if serialized object is a taskList
             if (obj instanceof TaskList) {
@@ -30,11 +30,12 @@ public class Storage {
         return new TaskList();
     }
 
-    public static void saveTaskList(TaskList taskList) {
+    public static void saveTaskList(String storageDir, TaskList taskList) {
+        Path path = Paths.get(storageDir, "taskList.ser");
         // try to save taskList
         try {
-            Files.createDirectories(PATH.getParent());
-            try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(PATH))) {
+            Files.createDirectories(path.getParent());
+            try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(path))) {
                 oos.writeObject(taskList);
             }
         } catch (IOException e) {
