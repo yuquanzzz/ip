@@ -70,6 +70,7 @@ public class Miku {
         Task task = Parser.parseTask(command, arguments);
         taskList.addTask(task);
         Ui.showTaskAdded(task, taskList.size());
+        Storage.saveTaskList(taskList);
     }
 
     private void handleDeleteTask(String indexString) throws MikuException {
@@ -77,18 +78,21 @@ public class Miku {
         Task task = taskList.getTask(index);
         taskList.deleteTask(index);
         Ui.showTaskDeleted(task, taskList.size());
+        Storage.saveTaskList(taskList);
     }
 
     private void handleMark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.markTask(index);
         Ui.showTaskMarked(taskList.getTask(index));
+        Storage.saveTaskList(taskList);
     }
 
     private void handleUnmark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.unmarkTask(index);
         Ui.showTaskUnmarked(taskList.getTask(index));
+        Storage.saveTaskList(taskList);
     }
 
     public static void main(String[] args) {
