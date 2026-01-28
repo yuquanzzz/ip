@@ -1,11 +1,14 @@
 enum Command {
     LIST,
     BYE,
-    MARK,
-    UNMARK,
+    // tasks
     TODO,
     DEADLINE,
     EVENT,
+    // task actions
+    MARK,
+    UNMARK,
     DELETE,
+    // unknown command
     UNKNOWN
 }
