@@ -4,8 +4,7 @@ public class Miku {
     private final TaskList taskList;
 
     public Miku() {
-        this.ui = new Ui();
-        this.taskList = new TaskList();
+        this.taskList = Storage.loadTaskList();
     }
 
     public void run() {
@@ -57,8 +56,9 @@ public class Miku {
                 Ui.showError(e.getMessage());
             }
         }
-
-        ui.showGoodbye();
+        
+        Storage.saveTaskList(taskList);
+        Ui.showGoodbye();
         sc.close();
     }
 
