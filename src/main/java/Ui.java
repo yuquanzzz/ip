@@ -64,9 +64,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showError(String message) {
+    public static void showError(String... messages) {
         System.out.println(LINE);
-        System.out.println("\t" + message);
+        for (String message : messages) {
+            System.out.println("\t" + message);
+        }
         System.out.println(LINE);
     }
 }
