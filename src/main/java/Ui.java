@@ -3,7 +3,7 @@ import java.util.List;
 public class Ui {
     private static final String LINE = "\t____________________________________________________________";
 
-    public void showWelcome() {
+    public static void showWelcome() {
         System.out.println(LINE);
         System.out.println("\tMiku, your personal assistant, is now online!");
         System.out.println("\tI've got your schedule synced and I'm ready to keep your day in perfect rhythm.");
@@ -11,7 +11,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showGoodbye() {
+    public static void showGoodbye() {
         System.out.println(LINE);
         System.out.println("\tThe final note has been played!");
         System.out.println("\tOur frequencies were perfectly in sync today!");
@@ -20,7 +20,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showTaskAdded(Task task, int taskCount) {
+    public static void showTaskAdded(Task task, int taskCount) {
         System.out.println(LINE);
         System.out.println("\tI've added this task:");
         System.out.println("\t  " + task);
@@ -28,7 +28,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showTaskDeleted(Task task, int taskCount) {
+    public static void showTaskDeleted(Task task, int taskCount) {
         System.out.println(LINE);
         System.out.println("\tOk! You've deleted a task. Keep going!");
         System.out.println("\t  " + task);
@@ -36,21 +36,21 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showTaskMarked(Task task) {
+    public static void showTaskMarked(Task task) {
         System.out.println(LINE);
         System.out.println("\tGreat job! You've marked a task as done!");
         System.out.println("\t  " + task);
         System.out.println(LINE);
     }
 
-    public void showTaskUnmarked(Task task) {
+    public static void showTaskUnmarked(Task task) {
         System.out.println(LINE);
         System.out.println("\tNo worries! You've unmarked a task. Keep going!");
         System.out.println("\t  " + task);
         System.out.println(LINE);
     }
 
-    public void showTaskList(List<Task> tasks) {
+    public static void showTaskList(List<Task> tasks) {
         System.out.println(LINE);
         if (tasks.isEmpty()) {
             System.out.println("\tYour to-do list is currently empty! " +
@@ -64,9 +64,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void showError(String message) {
+    public static void showError(String... messages) {
         System.out.println(LINE);
-        System.out.println("\t" + message);
+        for (String message : messages) {
+            System.out.println("\t" + message);
+        }
         System.out.println(LINE);
     }
 }

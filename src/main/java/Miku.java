@@ -1,17 +1,15 @@
 import java.util.Scanner;
 
 public class Miku {
-    private final Ui ui;
     private final TaskList taskList;
 
     public Miku() {
-        this.ui = new Ui();
-        this.taskList = new TaskList();
+        this.taskList = Storage.loadTaskList();
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        ui.showWelcome();
+        Ui.showWelcome();
 
         boolean exit = false;
         while (!exit) {
@@ -55,41 +53,42 @@ public class Miku {
                                 "Please try again with a valid command.");
                 }
             } catch (MikuException e) {
-                ui.showError(e.getMessage());
+                Ui.showError(e.getMessage());
             }
         }
-
-        ui.showGoodbye();
+        
+        Storage.saveTaskList(taskList);
+        Ui.showGoodbye();
         sc.close();
     }
 
     private void handleList() {
-        ui.showTaskList(taskList.getTasks());
+        Ui.showTaskList(taskList.getTasks());
     }
 
     private void handleAddTask(Command command, String arguments) throws MikuException {
         Task task = Parser.parseTask(command, arguments);
         taskList.addTask(task);
-        ui.showTaskAdded(task, taskList.size());
+        Ui.showTaskAdded(task, taskList.size());
     }
 
     private void handleDeleteTask(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         Task task = taskList.getTask(index);
         taskList.deleteTask(index);
-        ui.showTaskDeleted(task, taskList.size());
+        Ui.showTaskDeleted(task, taskList.size());
     }
 
     private void handleMark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.markTask(index);
-        ui.showTaskMarked(taskList.getTask(index));
+        Ui.showTaskMarked(taskList.getTask(index));
     }
 
     private void handleUnmark(String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         taskList.unmarkTask(index);
-        ui.showTaskUnmarked(taskList.getTask(index));
+        Ui.showTaskUnmarked(taskList.getTask(index));
     }
 
     public static void main(String[] args) {
