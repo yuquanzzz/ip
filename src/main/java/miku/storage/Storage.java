@@ -1,7 +1,6 @@
 package miku.storage;
 
 import miku.task.TaskList;
-import miku.ui.Ui;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,8 +10,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage {
+    private final String storageDir;
 
-    public static TaskList loadTaskList(String storageDir) {
+    public Storage(String storageDir) {
+        this.storageDir = storageDir;
+    }
+
+    public TaskList loadTaskList() {
         Path path = Paths.get(storageDir, "taskList.ser");
         // no existing taskList, creating new taskList
         if (Files.notExists(path)) {
@@ -27,15 +31,15 @@ public class Storage {
                 return (TaskList) obj;
             }
         } catch (IOException | ClassNotFoundException e) {
-            Ui.showError("Failed to load task list: " + e.getMessage(),
-                    "Creating new task list");
+            System.err.println("Failed to load task list: " + e.getMessage());
+            System.err.println("Creating new task list");
         }
 
         // failed to load existing taskList, creating new taskList
         return new TaskList();
     }
 
-    public static void saveTaskList(String storageDir, TaskList taskList) {
+    public void saveTaskList(TaskList taskList) {
         Path path = Paths.get(storageDir, "taskList.ser");
         // try to save taskList
         try {
