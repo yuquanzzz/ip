@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    
-    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static Command parse(String input) throws MikuException {
         String[] parts = input.split(" ", 2);
@@ -29,9 +27,9 @@ public class Parser {
         return switch (commandWord) {
             case "list" -> new ListCommand();
             case "bye" -> new ByeCommand();
-            case "mark" -> new MarkCommand(parseTaskIndex(arguments));
-            case "unmark" -> new UnmarkCommand(parseTaskIndex(arguments));
-            case "delete" -> new DeleteCommand(parseTaskIndex(arguments));
+            case "mark" -> new MarkCommand(parseTaskIndex(arguments, "mark"));
+            case "unmark" -> new UnmarkCommand(parseTaskIndex(arguments, "unmark"));
+            case "delete" -> new DeleteCommand(parseTaskIndex(arguments, "delete"));
             case "todo" -> new AddCommand(parseTodo(arguments));
             case "deadline" -> new AddCommand(parseDeadline(arguments));
             case "event" -> new AddCommand(parseEvent(arguments));
@@ -40,13 +38,13 @@ public class Parser {
         };
     }
 
-    private static int parseTaskIndex(String indexString) throws MikuException {
+    private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
         if (indexString == null || indexString.trim().isEmpty()) {
-            throw new MikuException("Please provide a valid task number!");
+            throw new MikuException("Please specify which task to " + commandType + "!");
         }
         try {
             int index = Integer.parseInt(indexString.trim()) - 1;
-            if (index <= 0) {
+            if (index < 0) {
                 throw new MikuException("Task number must be a positive number!");
             }
             return index;
@@ -54,10 +52,19 @@ public class Parser {
             throw new MikuException("Please provide a valid task number!");
         }
     }
+    
+    private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
+        final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(dateTimeString, DATETIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
+        }
+    }
 
     private static Task parseTodo(String arguments) throws MikuException {
         if (arguments == null || arguments.trim().isEmpty()) {
-            throw new MikuException("The description of a todo cannot be empty!");
+            throw new MikuException("The description cannot be empty!");
         }
         return new Todo(arguments.trim());
     }
@@ -79,12 +86,7 @@ public class Parser {
         if (by.isEmpty()) {
             throw new MikuException("The deadline time cannot be empty!");
         }
-        LocalDateTime by_datetime;
-        try {
-            by_datetime = LocalDateTime.parse(by, DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
-        }
+        LocalDateTime by_datetime = parseDateTime(by);
         return new Deadline(description, by_datetime);
     }
 
@@ -115,13 +117,7 @@ public class Parser {
         if (to.isEmpty()) {
             throw new MikuException("The end time cannot be empty!");
         }
-        LocalDateTime from_datetime, to_datetime;
-        try {
-            from_datetime = LocalDateTime.parse(from, DATETIME_FORMAT);
-            to_datetime = LocalDateTime.parse(to, DATETIME_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
-        }
+        LocalDateTime from_datetime = parseDateTime(from), to_datetime = parseDateTime(to);
         return new Event(description, from_datetime, to_datetime);
     }
 }
