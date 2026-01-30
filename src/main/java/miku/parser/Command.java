@@ -1,4 +1,6 @@
-enum Command {
+package miku.parser;
+
+public enum Command {
     LIST,
     BYE,
     // tasks

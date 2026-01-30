@@ -1,3 +1,6 @@
+package miku.ui;
+
+import miku.task.Task;
 import java.util.List;
 
 public class Ui {
