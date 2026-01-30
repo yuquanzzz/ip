@@ -1,8 +1,8 @@
 list
 todo read book
 todo return book
-deadline submit report /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline submit report /by 2026-01-30 12:00
+event project meeting /from 2026-01-30 12:00 /to 2026-01-30 22:00
 list
 mark 1
 mark 2
@@ -16,12 +16,15 @@ deadline
 deadline finish homework
 deadline  /by 
 deadline finish homework /by 
+deadline finish homework /by unparsabletime
 event
-event conference /to 5pm
-event conference /from 10am
-event  /from 10am /to 5pm
-event conference /from  /to 5pm
-event conference /from 10am /to 
+event conference /to 2026-01-30 22:00
+event conference /from 2026-01-30 22:00
+event  /from 2026-01-30 22:00 /to 2026-01-30 22:00
+event conference /from  /to 2026-01-30 22:00
+event conference /from 2026-01-30 22:00 /to 
+event conference /from 2026-01-30 22:00 /to unparsabletime
+event conference /from unparsabletime /to 2026-01-30 22:00
 mark
 unmark
 mark -1
