@@ -1,5 +1,12 @@
 package miku.parser;
 
+import miku.command.AddCommand;
+import miku.command.ByeCommand;
+import miku.command.Command;
+import miku.command.DeleteCommand;
+import miku.command.ListCommand;
+import miku.command.MarkCommand;
+import miku.command.UnmarkCommand;
 import miku.exception.MikuException;
 import miku.task.Deadline;
 import miku.task.Event;
