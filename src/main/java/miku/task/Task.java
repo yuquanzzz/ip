@@ -1,3 +1,5 @@
+package miku.task;
+
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {

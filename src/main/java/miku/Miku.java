@@ -1,3 +1,13 @@
+package miku;
+
+import miku.exception.MikuException;
+import miku.parser.Command;
+import miku.parser.Parser;
+import miku.storage.Storage;
+import miku.task.Task;
+import miku.task.TaskList;
+import miku.ui.Ui;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -32,8 +42,7 @@ public class Miku {
                 case MARK:
                 case UNMARK:
                 case DELETE:
-                    validateTaskIndex(parsedInput, command);
-                    handleTaskAction(command, parsedInput[1]);
+                    handleTaskAction(command, parsedInput.length > 1 ? parsedInput[1] : null);
                     break;
                 case BYE:
                     exit = true;
@@ -61,13 +70,6 @@ public class Miku {
         taskList.addTask(task);
         Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskAdded(task, taskList.size());
-    }
-
-    private void validateTaskIndex(String[] parsedInput, Command command) throws MikuException {
-        if (parsedInput.length < 2) {
-            String action = command.toString().toLowerCase();
-            throw new MikuException("Please specify which task to " + action + "!");
-        }
     }
 
     private void handleTaskAction(Command command, String indexString) throws MikuException {

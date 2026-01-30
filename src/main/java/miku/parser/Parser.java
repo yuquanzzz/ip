@@ -1,3 +1,11 @@
+package miku.parser;
+
+import miku.exception.MikuException;
+import miku.task.Deadline;
+import miku.task.Event;
+import miku.task.Task;
+import miku.task.Todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,7 +36,7 @@ public class Parser {
     public static int parseTaskIndex(String indexString) throws MikuException {
         try {
             int index = Integer.parseInt(indexString) - 1;
-            if (index < 0) {
+            if (index <= 0) {
                 throw new MikuException("Task number must be a positive number!");
             }
             return index;
