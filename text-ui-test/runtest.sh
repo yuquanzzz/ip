@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete .miku directory in home to ensure clean state for testing
+if [ -d "$HOME/.miku" ]
+then
+    rm -rf "$HOME/.miku"
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
 then
@@ -36,3 +42,4 @@ else
     echo "Test result: FAILED"
     exit 1
 fi
+

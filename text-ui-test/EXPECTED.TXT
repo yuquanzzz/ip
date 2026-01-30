@@ -17,21 +17,15 @@
 	Now you have 2 tasks in the list. Keep it up!
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
-	  [D][ ] submit report (by: Sunday)
-	Now you have 3 tasks in the list. Keep it up!
+	The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
-	  [E][ ] project meeting (from: Mon 2pm to: 4pm)
-	Now you have 4 tasks in the list. Keep it up!
+	The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your to-do list:
 	1. [T][ ] read book
 	2. [T][ ] return book
-	3. [D][ ] submit report (by: Sunday)
-	4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	____________________________________________________________
 	____________________________________________________________
 	Great job! You've marked a task as done!
@@ -45,8 +39,6 @@
 	Here are the tasks in your to-do list:
 	1. [T][X] read book
 	2. [T][X] return book
-	3. [D][ ] submit report (by: Sunday)
-	4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	____________________________________________________________
 	____________________________________________________________
 	No worries! You've unmarked a task. Keep going!
@@ -56,19 +48,15 @@
 	Here are the tasks in your to-do list:
 	1. [T][ ] read book
 	2. [T][X] return book
-	3. [D][ ] submit report (by: Sunday)
-	4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	____________________________________________________________
 	____________________________________________________________
 	Ok! You've deleted a task. Keep going!
 	  [T][ ] read book
-	Now you have 3 tasks in the list. Keep it up!
+	Now you have 1 tasks in the list. Keep it up!
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your to-do list:
 	1. [T][X] return book
-	2. [D][ ] submit report (by: Sunday)
-	3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	____________________________________________________________
 	____________________________________________________________
 	The description cannot be empty!
