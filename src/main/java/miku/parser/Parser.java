@@ -21,18 +21,22 @@ public class Parser {
     
     private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static Command parseCommand(String input) {
-        String commandWord = input.split(" ", 2)[0];
+    public static Command parse(String input) throws MikuException {
+        String[] parts = input.split(" ", 2);
+        String commandWord = parts[0];
+        String arguments = parts.length > 1 ? parts[1] : null;
+
         return switch (commandWord) {
-            case "list" -> Command.LIST;
-            case "bye" -> Command.BYE;
-            case "mark" -> Command.MARK;
-            case "unmark" -> Command.UNMARK;
-            case "todo" -> Command.TODO;
-            case "deadline" -> Command.DEADLINE;
-            case "event" -> Command.EVENT;
-            case "delete" -> Command.DELETE;
-            default -> Command.UNKNOWN;
+            case "list" -> new ListCommand();
+            case "bye" -> new ByeCommand();
+            case "mark" -> new MarkCommand(parseTaskIndex(arguments));
+            case "unmark" -> new UnmarkCommand(parseTaskIndex(arguments));
+            case "delete" -> new DeleteCommand(parseTaskIndex(arguments));
+            case "todo" -> new AddCommand(parseTodo(arguments));
+            case "deadline" -> new AddCommand(parseDeadline(arguments));
+            case "event" -> new AddCommand(parseEvent(arguments));
+            default -> throw new MikuException("I'm sorry, I didn't quite catch that command. " +
+                    "Please try again with a valid command.");
         };
     }
 
