@@ -55,17 +55,11 @@ public class Parser {
         }
     }
 
-    public static Task parseTask(Command command, String arguments) throws MikuException {
+    private static Task parseTodo(String arguments) throws MikuException {
         if (arguments == null || arguments.trim().isEmpty()) {
-            throw new MikuException("The description cannot be empty!");
+            throw new MikuException("The description of a todo cannot be empty!");
         }
-
-        return switch (command) {
-            case TODO -> new Todo(arguments.trim());
-            case DEADLINE -> parseDeadline(arguments);
-            case EVENT -> parseEvent(arguments);
-            default -> null;
-        };
+        return new Todo(arguments.trim());
     }
 
     private static Deadline parseDeadline(String arguments) throws MikuException {
