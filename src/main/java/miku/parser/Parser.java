@@ -40,13 +40,12 @@ public class Parser {
         };
     }
 
-    public static String[] parseInput(String input) {
-        return input.split(" ", 2);
-    }
-
-    public static int parseTaskIndex(String indexString) throws MikuException {
+    private static int parseTaskIndex(String indexString) throws MikuException {
+        if (indexString == null || indexString.trim().isEmpty()) {
+            throw new MikuException("Please provide a valid task number!");
+        }
         try {
-            int index = Integer.parseInt(indexString) - 1;
+            int index = Integer.parseInt(indexString.trim()) - 1;
             if (index <= 0) {
                 throw new MikuException("Task number must be a positive number!");
             }
@@ -70,6 +69,10 @@ public class Parser {
     }
 
     private static Deadline parseDeadline(String arguments) throws MikuException {
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("The description cannot be empty!");
+        }
+        
         int byIndex = arguments.indexOf("/by ");
         if (byIndex == -1) {
             throw new MikuException("Please specify the deadline using /by <time>!");
@@ -92,6 +95,10 @@ public class Parser {
     }
 
     private static Event parseEvent(String arguments) throws MikuException {
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("The description cannot be empty!");
+        }
+        
         int fromIndex = arguments.indexOf("/from ");
         int toIndex = arguments.indexOf(" /to ");
 
