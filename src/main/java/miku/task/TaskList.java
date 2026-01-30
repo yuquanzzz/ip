@@ -1,9 +1,10 @@
 package miku.task;
 
-import miku.exception.MikuException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import miku.exception.MikuException;
 
 public class TaskList implements Serializable {
     private final List<Task> tasks;

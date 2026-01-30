@@ -1,5 +1,9 @@
 package miku.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import miku.command.AddCommand;
 import miku.command.ByeCommand;
 import miku.command.Command;
@@ -13,9 +17,6 @@ import miku.task.Event;
 import miku.task.Task;
 import miku.task.Todo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
