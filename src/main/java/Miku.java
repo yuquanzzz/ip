@@ -1,7 +1,8 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Miku {
-    static final String STORAGE_DIR = "data/";
+    static final String STORAGE_DIR = System.getProperty("user.home") + File.separator + ".miku" + File.separator;
     private final TaskList taskList;
 
     public Miku() {
@@ -29,22 +30,10 @@ public class Miku {
                     handleAddTask(command, parsedInput.length > 1 ? parsedInput[1] : null);
                     break;
                 case MARK:
-                    if (parsedInput.length < 2) {
-                        throw new MikuException("Please specify which task to mark!");
-                    }
-                    handleMark(parsedInput[1]);
-                    break;
                 case UNMARK:
-                    if (parsedInput.length < 2) {
-                        throw new MikuException("Please specify which task to unmark!");
-                    }
-                    handleUnmark(parsedInput[1]);
-                    break;
                 case DELETE:
-                    if (parsedInput.length < 2) {
-                        throw new MikuException("Please specify which task to delete!");
-                    }
-                    handleDeleteTask(parsedInput[1]);
+                    validateTaskIndex(parsedInput, command);
+                    handleTaskAction(command, parsedInput[1]);
                     break;
                 case BYE:
                     exit = true;
@@ -74,26 +63,34 @@ public class Miku {
         Ui.showTaskAdded(task, taskList.size());
     }
 
-    private void handleDeleteTask(String indexString) throws MikuException {
+    private void validateTaskIndex(String[] parsedInput, Command command) throws MikuException {
+        if (parsedInput.length < 2) {
+            String action = command.toString().toLowerCase();
+            throw new MikuException("Please specify which task to " + action + "!");
+        }
+    }
+
+    private void handleTaskAction(Command command, String indexString) throws MikuException {
         int index = Parser.parseTaskIndex(indexString);
         Task task = taskList.getTask(index);
-        taskList.deleteTask(index);
-        Storage.saveTaskList(STORAGE_DIR, taskList);
-        Ui.showTaskDeleted(task, taskList.size());
-    }
 
-    private void handleMark(String indexString) throws MikuException {
-        int index = Parser.parseTaskIndex(indexString);
-        taskList.markTask(index);
-        Storage.saveTaskList(STORAGE_DIR, taskList);
-        Ui.showTaskMarked(taskList.getTask(index));
-    }
-
-    private void handleUnmark(String indexString) throws MikuException {
-        int index = Parser.parseTaskIndex(indexString);
-        taskList.unmarkTask(index);
-        Storage.saveTaskList(STORAGE_DIR, taskList);
-        Ui.showTaskUnmarked(taskList.getTask(index));
+        switch (command) {
+        case MARK:
+            taskList.markTask(index);
+            Storage.saveTaskList(STORAGE_DIR, taskList);
+            Ui.showTaskMarked(task);
+            break;
+        case UNMARK:
+            taskList.unmarkTask(index);
+            Storage.saveTaskList(STORAGE_DIR, taskList);
+            Ui.showTaskUnmarked(task);
+            break;
+        case DELETE:
+            taskList.deleteTask(index);
+            Storage.saveTaskList(STORAGE_DIR, taskList);
+            Ui.showTaskDeleted(task, taskList.size());
+            break;
+        }
     }
 
     public static void main(String[] args) {
