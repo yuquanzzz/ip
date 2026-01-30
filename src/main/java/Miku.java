@@ -72,6 +72,7 @@ public class Miku {
         taskList.addTask(task);
         Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskAdded(task, taskList.size());
+        Storage.saveTaskList(taskList);
     }
 
     private void handleDeleteTask(String indexString) throws MikuException {
@@ -80,6 +81,7 @@ public class Miku {
         taskList.deleteTask(index);
         Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskDeleted(task, taskList.size());
+        Storage.saveTaskList(taskList);
     }
 
     private void handleMark(String indexString) throws MikuException {
@@ -87,6 +89,7 @@ public class Miku {
         taskList.markTask(index);
         Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskMarked(taskList.getTask(index));
+        Storage.saveTaskList(taskList);
     }
 
     private void handleUnmark(String indexString) throws MikuException {
@@ -94,6 +97,7 @@ public class Miku {
         taskList.unmarkTask(index);
         Storage.saveTaskList(STORAGE_DIR, taskList);
         Ui.showTaskUnmarked(taskList.getTask(index));
+        Storage.saveTaskList(taskList);
     }
 
     public static void main(String[] args) {

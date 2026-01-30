@@ -1,4 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
+    
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static Command parseCommand(String input) {
         String commandWord = input.split(" ", 2)[0];
@@ -57,7 +63,13 @@ public class Parser {
         if (by.isEmpty()) {
             throw new MikuException("The deadline time cannot be empty!");
         }
-        return new Deadline(description, by);
+        LocalDateTime by_datetime;
+        try {
+            by_datetime = LocalDateTime.parse(by, DATETIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
+        }
+        return new Deadline(description, by_datetime);
     }
 
     private static Event parseEvent(String arguments) throws MikuException {
@@ -83,6 +95,13 @@ public class Parser {
         if (to.isEmpty()) {
             throw new MikuException("The end time cannot be empty!");
         }
-        return new Event(description, from, to);
+        LocalDateTime from_datetime, to_datetime;
+        try {
+            from_datetime = LocalDateTime.parse(from, DATETIME_FORMAT);
+            to_datetime = LocalDateTime.parse(to, DATETIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
+        }
+        return new Event(description, from_datetime, to_datetime);
     }
 }
