@@ -1,6 +1,5 @@
 package miku.command;
 
-import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
 import miku.ui.Ui;

@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.saveTaskList(tasks);
         ui.showTaskAdded(task, tasks.size());
