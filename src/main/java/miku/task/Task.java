@@ -18,6 +18,10 @@ public abstract class Task implements Serializable {
     public void markAsUndone() {
         this.isDone = false;
     }
+    
+    public boolean isDone() {
+        return isDone;
+    }
 
     @Override
     public String toString() {
