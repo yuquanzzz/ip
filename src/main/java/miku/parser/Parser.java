@@ -34,8 +34,7 @@ public class Parser {
             case "todo" -> new AddCommand(parseTodo(arguments));
             case "deadline" -> new AddCommand(parseDeadline(arguments));
             case "event" -> new AddCommand(parseEvent(arguments));
-            default -> throw new MikuException("I'm sorry, I didn't quite catch that command. " +
-                    "Please try again with a valid command.");
+            default -> throw new MikuException("Invalid command, please try again with a valid command.");
         };
     }
 
