@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import miku.exception.MikuException;
 import miku.task.TaskList;
 
 /**
@@ -47,8 +48,8 @@ public class Storage {
                 return (TaskList) obj;
             }
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Failed to load task list: " + e.getMessage());
-            System.err.println("Creating new task list");
+            System.out.println("\tFailed to load existing task list: " + e.getMessage());
+            System.out.println("\tCreating new task list instead");
         }
 
         // failed to load existing taskList, creating new taskList
@@ -60,8 +61,9 @@ public class Storage {
      * Creates the storage directory if it does not exist.
      *
      * @param taskList The task list to be saved.
+     * @throws MikuException If task list cannot be saved
      */
-    public void saveTaskList(TaskList taskList) {
+    public void saveTaskList(TaskList taskList) throws MikuException {
         Path path = Paths.get(storageDir, "taskList.ser");
         // try to save taskList
         try {
@@ -70,7 +72,7 @@ public class Storage {
                 oos.writeObject(taskList);
             }
         } catch (IOException e) {
-            System.err.println("Failed to save task list: " + e.getMessage());
+            throw new MikuException("Failed to save task list: " + e.getMessage());
         }
     }
 }

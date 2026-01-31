@@ -1,5 +1,6 @@
 package miku.command;
 
+import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
 import miku.ui.Ui;
@@ -11,7 +12,7 @@ import miku.ui.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
         storage.saveTaskList(tasks);
         ui.showGoodbye();
     }
