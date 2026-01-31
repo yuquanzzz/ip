@@ -126,4 +126,21 @@ public class Ui {
     public void showError(String message) {
         System.out.println("\t" + message);
     }
+
+    /**
+     * Displays the search results for tasks matching a keyword.
+     *
+     * @param tasks The list of matching tasks to display.
+     * @param keyword The keyword that was searched for.
+     */
+    public void showFindResults(List<Task> tasks, String keyword) {
+        if (tasks.isEmpty()) {
+            System.out.println("\tNo tasks found matching \"" + keyword + "\".");
+        } else {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+            }
+        }
+    }
 }

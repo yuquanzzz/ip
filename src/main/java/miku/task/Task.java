@@ -23,6 +23,10 @@ public abstract class Task implements Serializable {
         return isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
