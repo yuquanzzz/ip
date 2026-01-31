@@ -11,9 +11,9 @@ import miku.ui.Ui;
 
 
 public class Miku {
-    private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator 
+    private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator
             + ".miku" + File.separator;     // saves user data under .miku folder
-    
+
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
@@ -22,6 +22,16 @@ public class Miku {
         ui = new Ui();
         storage = new Storage(STORAGE_DIR);
         tasks = storage.loadTaskList();
+    }
+
+    /**
+     * Entry point of the application.
+     * Creates a new Miku instance and starts the chatbot.
+     *
+     * @param args Command line arguments (not used).
+     */
+    public static void main(String[] args) {
+        new Miku().run();
     }
 
     public void run() {
@@ -40,15 +50,5 @@ public class Miku {
                 ui.showLine();
             }
         }
-    }
-
-    /**
-     * Entry point of the application.
-     * Creates a new Miku instance and starts the chatbot.
-     *
-     * @param args Command line arguments (not used).
-     */
-    public static void main(String[] args) {
-        new Miku().run();
     }
 }

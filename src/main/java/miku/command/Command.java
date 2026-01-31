@@ -10,7 +10,7 @@ import miku.ui.Ui;
  * All specific command types should extend this class.
  */
 public abstract class Command {
-    
+
     /**
      * Executes the command with the given task list, UI, and storage.
      *
@@ -20,7 +20,7 @@ public abstract class Command {
      * @throws MikuException If an error occurs during command execution.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException;
-    
+
     /**
      * Checks if this command causes the application to exit.
      *

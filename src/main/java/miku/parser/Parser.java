@@ -61,7 +61,7 @@ public class Parser {
             throw new MikuException("Please provide a valid task number!");
         }
     }
-    
+
     private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
         final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
@@ -82,7 +82,7 @@ public class Parser {
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
-        
+
         int byIndex = arguments.indexOf("/by ");
         if (byIndex == -1) {
             throw new MikuException("Please specify the deadline using /by <time>!");
@@ -103,7 +103,7 @@ public class Parser {
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
-        
+
         int fromIndex = arguments.indexOf("/from ");
         int toIndex = arguments.indexOf(" /to ");
 

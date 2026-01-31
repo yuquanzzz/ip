@@ -11,7 +11,7 @@ import miku.ui.Ui;
  */
 public class UnmarkCommand extends Command {
     private final int index;
-    
+
     /**
      * Constructs an UnmarkCommand with the specified task index.
      *
@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
     public UnmarkCommand(int index) {
         this.index = index;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
         tasks.unmarkTask(index);

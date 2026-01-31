@@ -11,7 +11,7 @@ import miku.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private final int index;
-    
+
     /**
      * Constructs a DeleteCommand with the specified task index.
      *
