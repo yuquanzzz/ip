@@ -1,18 +1,18 @@
 package miku;
 
-import miku.exception.MikuException;
+import java.io.File;
+
 import miku.command.Command;
+import miku.exception.MikuException;
 import miku.parser.Parser;
 import miku.storage.Storage;
 import miku.task.TaskList;
 import miku.ui.Ui;
 
-import java.io.File;
-
 public class Miku {
-    private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator 
+    private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator
             + ".miku" + File.separator;     // saves user data under .miku folder
-    
+
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
@@ -21,6 +21,10 @@ public class Miku {
         ui = new Ui();
         storage = new Storage(STORAGE_DIR);
         tasks = storage.loadTaskList();
+    }
+
+    public static void main(String[] args) {
+        new Miku().run();
     }
 
     public void run() {
@@ -39,9 +43,5 @@ public class Miku {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Miku().run();
     }
 }

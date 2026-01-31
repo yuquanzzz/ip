@@ -1,5 +1,9 @@
 package miku.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import miku.command.AddCommand;
 import miku.command.ByeCommand;
 import miku.command.Command;
@@ -12,10 +16,6 @@ import miku.task.Deadline;
 import miku.task.Event;
 import miku.task.Task;
 import miku.task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -52,7 +52,7 @@ public class Parser {
             throw new MikuException("Please provide a valid task number!");
         }
     }
-    
+
     private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
         final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
@@ -73,7 +73,7 @@ public class Parser {
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
-        
+
         int byIndex = arguments.indexOf("/by ");
         if (byIndex == -1) {
             throw new MikuException("Please specify the deadline using /by <time>!");
@@ -94,7 +94,7 @@ public class Parser {
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
-        
+
         int fromIndex = arguments.indexOf("/from ");
         int toIndex = arguments.indexOf(" /to ");
 
