@@ -17,9 +17,18 @@ import miku.task.Event;
 import miku.task.Task;
 import miku.task.Todo;
 
-
+/**
+ * Parses user input and converts it into executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input string and returns the corresponding command.
+     *
+     * @param input The user input string to parse.
+     * @return The command corresponding to the user input.
+     * @throws MikuException If the input is invalid or cannot be parsed.
+     */
     public static Command parse(String input) throws MikuException {
         String[] parts = input.split(" ", 2);
         String commandWord = parts[0];

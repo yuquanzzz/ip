@@ -39,6 +39,12 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Saves the task list to storage.
+     * Creates the storage directory if it does not exist.
+     *
+     * @param taskList The task list to be saved.
+     */
     public void saveTaskList(TaskList taskList) {
         Path path = Paths.get(storageDir, "taskList.ser");
         // try to save taskList

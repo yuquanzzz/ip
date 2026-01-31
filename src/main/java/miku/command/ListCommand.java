@@ -4,6 +4,9 @@ import miku.storage.Storage;
 import miku.task.TaskList;
 import miku.ui.Ui;
 
+/**
+ * Represents a command to list all tasks in the task list.
+ */
 public class ListCommand extends Command {
     
     @Override
