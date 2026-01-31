@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import miku.exception.MikuException;
 import miku.task.Deadline;
 import miku.task.Event;
 import miku.task.TaskList;
@@ -36,7 +37,7 @@ class StorageTest {
     }
 
     @Test
-    void saveAndLoadTaskList_mixedTaskTypes_preservesAllTaskTypes() {
+    void saveAndLoadTaskList_mixedTaskTypes_preservesAllTaskTypes() throws MikuException {
         TaskList originalTaskList = new TaskList();
         originalTaskList.addTask(new Todo("todo task"));
         originalTaskList.addTask(new Deadline("deadline task",
@@ -66,7 +67,7 @@ class StorageTest {
     }
 
     @Test
-    void saveAndLoadTaskList_emptyTaskList_preservesEmptyList() {
+    void saveAndLoadTaskList_emptyTaskList_preservesEmptyList() throws MikuException {
         TaskList emptyTaskList = new TaskList();
         storage.saveTaskList(emptyTaskList);
 
@@ -75,7 +76,7 @@ class StorageTest {
     }
 
     @Test
-    void saveTaskList_multipleSaves_overwritesPreviousData() {
+    void saveTaskList_multipleSaves_overwritesPreviousData() throws MikuException {
         TaskList firstTaskList = new TaskList();
         firstTaskList.addTask(new Todo("first task"));
         storage.saveTaskList(firstTaskList);
