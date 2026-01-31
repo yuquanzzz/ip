@@ -9,13 +9,29 @@ import java.nio.file.Paths;
 
 import miku.task.TaskList;
 
+/**
+ * Handles the loading and saving of tasks to persistent storage.
+ * Tasks are serialized and stored as a file in the specified directory.
+ */
 public class Storage {
     private final String storageDir;
 
+    /**
+     * Constructs a new Storage instance with the specified directory.
+     *
+     * @param storageDir The directory path where task data will be stored.
+     */
     public Storage(String storageDir) {
         this.storageDir = storageDir;
     }
 
+    /**
+     * Loads the task list from storage.
+     * If no existing task list file is found, returns a new empty task list.
+     * If loading fails due to IO or deserialization errors, returns a new empty task list.
+     *
+     * @return The loaded TaskList, or a new empty TaskList if loading fails.
+     */
     public TaskList loadTaskList() {
         Path path = Paths.get(storageDir, "taskList.ser");
         // no existing taskList, creating new taskList
