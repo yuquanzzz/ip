@@ -45,6 +45,11 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
+    /**
+     * Deletes a task from the task list at the specified index.
+     *
+     * @param index The index of the task to delete (0-based).
+     */
     public void deleteTask(int index) {
         tasks.remove(index);
     }

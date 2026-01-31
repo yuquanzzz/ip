@@ -41,6 +41,12 @@ public class Miku {
         }
     }
 
+    /**
+     * Entry point of the application.
+     * Creates a new Miku instance and starts the chatbot.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         new Miku().run();
     }
