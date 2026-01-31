@@ -1,5 +1,6 @@
 package miku.task;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -8,6 +9,9 @@ import java.io.Serializable;
  * Implements Serializable to allow tasks to be saved to and loaded from storage.
  */
 public abstract class Task implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final String description;
     private boolean isDone;
 

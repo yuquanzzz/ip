@@ -1,7 +1,9 @@
 package miku.task;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import miku.exception.MikuException;
@@ -12,6 +14,9 @@ import miku.exception.MikuException;
  * Implements Serializable to allow the task list to be saved to and loaded from storage.
  */
 public class TaskList implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final List<Task> tasks;
 
     public TaskList() {
@@ -30,11 +35,17 @@ public class TaskList implements Serializable {
     }
 
     public List<Task> getTasks() {
-        return tasks;
+        return Collections.unmodifiableList(tasks); // read-only access for outside methods
     }
 
     public int size() {
         return tasks.size();
+    }
+
+    private void validateIndex(int index) throws MikuException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new MikuException("Task number " + (index + 1) + " does not exist!");
+        }
     }
 
     /**
@@ -44,9 +55,7 @@ public class TaskList implements Serializable {
      * @throws MikuException If the index is out of bounds.
      */
     public void markTask(int index) throws MikuException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new MikuException("Task number " + (index + 1) + " does not exist!");
-        }
+        validateIndex(index);
         tasks.get(index).markAsDone();
     }
 
@@ -57,9 +66,7 @@ public class TaskList implements Serializable {
      * @throws MikuException If the index is out of bounds.
      */
     public void unmarkTask(int index) throws MikuException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new MikuException("Task number " + (index + 1) + " does not exist!");
-        }
+        validateIndex(index);
         tasks.get(index).markAsUndone();
     }
 
@@ -67,8 +74,10 @@ public class TaskList implements Serializable {
      * Deletes a task from the task list at the specified index.
      *
      * @param index The index of the task to delete (0-based).
+     * @throws MikuException If the index is out of bounds.
      */
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws MikuException {
+        validateIndex(index);
         tasks.remove(index);
     }
 
