@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
         Task task = tasks.getTask(index);

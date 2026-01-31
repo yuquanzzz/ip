@@ -108,8 +108,8 @@ public class Ui {
      */
     public void showTaskList(List<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("\tYour to-do list is currently empty! " +
-                    "Let's add some tasks to get started!");
+            System.out.println("\tYour to-do list is currently empty! "
+                    + "Let's add some tasks to get started!");
         } else {
             System.out.println("\tHere are the tasks in your to-do list:");
             for (int i = 0; i < tasks.size(); i++) {

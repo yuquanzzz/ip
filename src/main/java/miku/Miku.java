@@ -10,17 +10,31 @@ import miku.task.TaskList;
 import miku.ui.Ui;
 
 
+/**
+ * Main class for the Miku chatbot application.
+ * Miku is a task management chatbot that can handle todos, deadlines, and events.
+ * It supports saving and loading tasks from a file for persistence.
+ */
 public class Miku {
-    private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator
-            + ".miku" + File.separator;     // saves user data under .miku folder
+    // default save directory is $HOME/.miku
+    private static final String STORAGE_DIR =
+            System.getProperty("user.home") + File.separator + ".miku" + File.separator;
 
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
 
-    public Miku() {
+    /**
+     * Constructs a new Miku chatbot instance.
+     * Initializes the UI, storage, and parser components.
+     * Attempts to load existing tasks from the specified file path.
+     * If loading fails, starts with an empty task list.
+     *
+     * @param filePath The file path where tasks are stored and loaded from.
+     */
+    public Miku(String filePath) {
         ui = new Ui();
-        storage = new Storage(STORAGE_DIR);
+        storage = new Storage(filePath);
         tasks = storage.loadTaskList();
     }
 
@@ -31,9 +45,15 @@ public class Miku {
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        new Miku().run();
+        new Miku(STORAGE_DIR).run();
     }
 
+    /**
+     * Runs the main loop of the Miku chatbot.
+     * Displays a welcome message, then continuously reads and processes user commands
+     * until an exit command is received.
+     * Handles any exceptions by displaying error messages to the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

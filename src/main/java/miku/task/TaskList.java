@@ -6,6 +6,11 @@ import java.util.List;
 
 import miku.exception.MikuException;
 
+/**
+ * Represents a list of tasks.
+ * Provides operations to add, retrieve, mark, unmark, delete, and find tasks.
+ * Implements Serializable to allow the task list to be saved to and loaded from storage.
+ */
 public class TaskList implements Serializable {
     private final List<Task> tasks;
 
@@ -24,6 +29,20 @@ public class TaskList implements Serializable {
         return tasks.get(index);
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    /**
+     * Marks a task as done at the specified index.
+     *
+     * @param index The index of the task to mark as done (0-based).
+     * @throws MikuException If the index is out of bounds.
+     */
     public void markTask(int index) throws MikuException {
         if (index < 0 || index >= tasks.size()) {
             throw new MikuException("Task number " + (index + 1) + " does not exist!");
@@ -31,19 +50,17 @@ public class TaskList implements Serializable {
         tasks.get(index).markAsDone();
     }
 
+    /**
+     * Marks a task as not done at the specified index.
+     *
+     * @param index The index of the task to mark as not done (0-based).
+     * @throws MikuException If the index is out of bounds.
+     */
     public void unmarkTask(int index) throws MikuException {
         if (index < 0 || index >= tasks.size()) {
             throw new MikuException("Task number " + (index + 1) + " does not exist!");
         }
         tasks.get(index).markAsUndone();
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public int size() {
-        return tasks.size();
     }
 
     /**
