@@ -4,6 +4,7 @@ import miku.command.AddCommand;
 import miku.command.ByeCommand;
 import miku.command.Command;
 import miku.command.DeleteCommand;
+import miku.command.FindCommand;
 import miku.command.ListCommand;
 import miku.command.MarkCommand;
 import miku.command.UnmarkCommand;
@@ -33,6 +34,7 @@ public class Parser {
             case "todo" -> new AddCommand(parseTodo(arguments));
             case "deadline" -> new AddCommand(parseDeadline(arguments));
             case "event" -> new AddCommand(parseEvent(arguments));
+            case "find" -> new FindCommand(parseKeyword(arguments));
             default -> throw new MikuException("I'm sorry, I didn't quite catch that command. " +
                     "Please try again with a valid command.");
         };
@@ -119,5 +121,12 @@ public class Parser {
         }
         LocalDateTime from_datetime = parseDateTime(from), to_datetime = parseDateTime(to);
         return new Event(description, from_datetime, to_datetime);
+    }
+
+    private static String parseKeyword(String arguments) throws MikuException {
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("Please specify a keyword to search for!");
+        }
+        return arguments.trim();
     }
 }
