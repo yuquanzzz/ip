@@ -1,8 +1,9 @@
 package miku.ui;
 
-import miku.task.Task;
 import java.util.List;
 import java.util.Scanner;
+
+import miku.task.Task;
 
 public class Ui {
     private static final String LINE = "\t____________________________________________________________";

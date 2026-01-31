@@ -1,13 +1,13 @@
 package miku.storage;
 
-import miku.task.TaskList;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import miku.task.TaskList;
 
 public class Storage {
     private final String storageDir;

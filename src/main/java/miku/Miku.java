@@ -1,13 +1,14 @@
 package miku;
 
-import miku.exception.MikuException;
+import java.io.File;
+
 import miku.command.Command;
+import miku.exception.MikuException;
 import miku.parser.Parser;
 import miku.storage.Storage;
 import miku.task.TaskList;
 import miku.ui.Ui;
 
-import java.io.File;
 
 public class Miku {
     private static final String STORAGE_DIR = System.getProperty("user.home") + File.separator 
