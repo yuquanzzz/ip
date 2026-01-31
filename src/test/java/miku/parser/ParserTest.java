@@ -54,6 +54,48 @@ class ParserTest {
         assertInstanceOf(AddCommand.class, command);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"list", "   list", "list   ", "   list   "})
+    void parse_listCommandWithExtraWhitespace_returnsListCommand(String input) throws MikuException {
+        Command command = Parser.parse(input);
+        assertInstanceOf(ListCommand.class, command);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"todo read book", "todo   read book   ", "   todo   read book"})
+    void parse_todoWithExtraWhitespace_returnsAddCommand(String input) throws MikuException {
+        Command command = Parser.parse(input);
+        assertInstanceOf(AddCommand.class, command);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "deadline submit report /by 2026-12-31 23:59",
+        "deadline submit report   /by   2026-12-31 23:59",
+        "   deadline submit report   /by   2026-12-31 23:59   "
+    })
+    void parse_deadlineWithExtraWhitespace_returnsAddCommand(String input) throws MikuException {
+        Command command = Parser.parse(input);
+        assertInstanceOf(AddCommand.class, command);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "event meeting /from 2026-08-15 10:00 /to 2026-08-15 12:00",
+        "event meeting   /from   2026-08-15 10:00   /to   2026-08-15 12:00",
+        "   event meeting   /from   2026-08-15 10:00   /to   2026-08-15 12:00   "
+    })
+    void parse_eventWithExtraWhitespace_returnsAddCommand(String input) throws MikuException {
+        Command command = Parser.parse(input);
+        assertInstanceOf(AddCommand.class, command);
+    }
+
+    @Test
+    void parse_emptyInput_exceptionThrown() {
+        MikuException exception = assertThrows(MikuException.class, () -> Parser.parse("   "));
+        assertEquals("Invalid command, please try again with a valid command.", exception.getMessage());
+    }
+
     @Test
     void parse_invalidCommand_exceptionThrown() {
         MikuException exception = assertThrows(MikuException.class, () -> Parser.parse("invalid"));
