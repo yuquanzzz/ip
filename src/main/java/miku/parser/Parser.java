@@ -3,6 +3,8 @@ package miku.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import miku.command.AddCommand;
 import miku.command.ByeCommand;
@@ -23,6 +25,10 @@ import miku.task.Todo;
  */
 public class Parser {
 
+    private static final Pattern DEADLINE_BY = Pattern.compile("\\s*/by\\b\\s*");
+    private static final Pattern EVENT_FROM = Pattern.compile("\\s*/from\\b\\s*");
+    private static final Pattern EVENT_TO = Pattern.compile("\\s*/to\\b\\s*");
+
     /**
      * Parses the user input string and returns the corresponding command.
      *
@@ -31,9 +37,28 @@ public class Parser {
      * @throws MikuException If the input is invalid or cannot be parsed.
      */
     public static Command parse(String input) throws MikuException {
-        String[] parts = input.split(" ", 2);
-        String commandWord = parts[0];
-        String arguments = parts.length > 1 ? parts[1] : null;
+        if (input == null || input.trim().isEmpty()) {
+            throw new MikuException("Invalid command, please try again with a valid command.");
+        }
+        String trimmedInput = input.trim();
+        // find first whitespace to split between command and arguments
+        int firstSpaceIndex = indexOfWhitespace(trimmedInput);
+
+        String commandWord;
+        String arguments;
+
+        if (firstSpaceIndex == -1) {
+            // whitespace not found, treat entire input as command
+            commandWord = trimmedInput.toLowerCase();
+            arguments = null;
+        } else {
+            // whitespace found, split input to command and arguments
+            commandWord = trimmedInput.substring(0, firstSpaceIndex).toLowerCase();
+            arguments = trimmedInput.substring(firstSpaceIndex + 1).trim();
+            if (arguments.isEmpty()) {
+                arguments = null;
+            }
+        }
 
         return switch (commandWord) {
         case "list" -> new ListCommand();
@@ -49,12 +74,21 @@ public class Parser {
         };
     }
 
+    private static int indexOfWhitespace(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isWhitespace(input.charAt(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
         if (indexString == null || indexString.trim().isEmpty()) {
             throw new MikuException("Please specify which task to " + commandType + "!");
         }
         try {
-            int index = Integer.parseInt(indexString.trim()) - 1;
+            int index = Integer.parseInt(indexString.trim()) - 1; // 0-based indexing
             if (index < 0) {
                 throw new MikuException("Task number must be a positive number!");
             }
@@ -85,15 +119,16 @@ public class Parser {
             throw new MikuException("The description cannot be empty!");
         }
 
-        int byIndex = arguments.indexOf("/by ");
-        if (byIndex == -1) {
+        Matcher matcher = DEADLINE_BY.matcher(arguments);
+        if (!matcher.find()) {
             throw new MikuException("Please specify the deadline using /by <time>!");
         }
-        String description = arguments.substring(0, byIndex).trim();
+
+        String description = arguments.substring(0, matcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of a deadline cannot be empty!");
         }
-        String by = arguments.substring(byIndex + 4).trim();
+        String by = arguments.substring(matcher.end()).trim();
         if (by.isEmpty()) {
             throw new MikuException("The deadline time cannot be empty!");
         }
@@ -106,25 +141,25 @@ public class Parser {
             throw new MikuException("The description cannot be empty!");
         }
 
-        int fromIndex = arguments.indexOf("/from ");
-        int toIndex = arguments.indexOf(" /to ");
-
-        if (fromIndex == -1) {
+        Matcher fromMatcher = EVENT_FROM.matcher(arguments);
+        if (!fromMatcher.find()) {
             throw new MikuException("Please specify the start time using /from <time>!");
         }
-        if (toIndex == -1) {
+
+        Matcher toMatcher = EVENT_TO.matcher(arguments);
+        if (!toMatcher.find(fromMatcher.end())) {
             throw new MikuException("Please specify the end time using /to <time>!");
         }
 
-        String description = arguments.substring(0, fromIndex).trim();
+        String description = arguments.substring(0, fromMatcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of an event cannot be empty!");
         }
-        String from = arguments.substring(fromIndex + 6, toIndex).trim();
+        String from = arguments.substring(fromMatcher.end(), toMatcher.start()).trim();
         if (from.isEmpty()) {
             throw new MikuException("The start time cannot be empty!");
         }
-        String to = arguments.substring(toIndex + 5).trim();
+        String to = arguments.substring(toMatcher.end()).trim();
         if (to.isEmpty()) {
             throw new MikuException("The end time cannot be empty!");
         }
