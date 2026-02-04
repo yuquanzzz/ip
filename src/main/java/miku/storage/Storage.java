@@ -42,10 +42,10 @@ public class Storage {
 
         // try to load existing taskList
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(path))) {
-            Object obj = ois.readObject();
+            Object loadedObj = ois.readObject();
             // check if serialized object is a taskList
-            if (obj instanceof TaskList) {
-                return (TaskList) obj;
+            if (loadedObj instanceof TaskList) {
+                return (TaskList) loadedObj;
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("\tFailed to load existing task list: " + e.getMessage());
