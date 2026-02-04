@@ -14,7 +14,7 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * Constructs a Ui object and initializes the scanner for reading user input.
+     * Constructs an Ui object and initialises the scanner for reading user input.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);

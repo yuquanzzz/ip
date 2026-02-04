@@ -26,7 +26,7 @@ public class Miku {
 
     /**
      * Constructs a new Miku chatbot instance.
-     * Initializes the UI, storage, and parser components.
+     * Initialises the UI, storage, and parser components.
      * Attempts to load existing tasks from the specified file path.
      * If loading fails, starts with an empty task list.
      *
