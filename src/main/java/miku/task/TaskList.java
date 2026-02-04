@@ -42,7 +42,7 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
-    private void validateIndex(int index) throws MikuException {
+    private void validateTaskIndex(int index) throws MikuException {
         if (index < 0 || index >= tasks.size()) {
             throw new MikuException("Task number " + (index + 1) + " does not exist!");
         }
@@ -55,7 +55,7 @@ public class TaskList implements Serializable {
      * @throws MikuException If the index is out of bounds.
      */
     public void markTask(int index) throws MikuException {
-        validateIndex(index);
+        validateTaskIndex(index);
         tasks.get(index).markAsDone();
     }
 
@@ -66,7 +66,7 @@ public class TaskList implements Serializable {
      * @throws MikuException If the index is out of bounds.
      */
     public void unmarkTask(int index) throws MikuException {
-        validateIndex(index);
+        validateTaskIndex(index);
         tasks.get(index).markAsUndone();
     }
 
@@ -77,7 +77,7 @@ public class TaskList implements Serializable {
      * @throws MikuException If the index is out of bounds.
      */
     public void deleteTask(int index) throws MikuException {
-        validateIndex(index);
+        validateTaskIndex(index);
         tasks.remove(index);
     }
 

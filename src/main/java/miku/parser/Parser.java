@@ -99,9 +99,9 @@ public class Parser {
     }
 
     private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
-        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
-            return LocalDateTime.parse(dateTimeString, dateTimeFormatter);
+            return LocalDateTime.parse(dateTimeString, dateTimeFormat);
         } catch (DateTimeParseException e) {
             throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
         }
