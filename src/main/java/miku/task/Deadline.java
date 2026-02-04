@@ -7,22 +7,22 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private final LocalDateTime byTime;
+    private final LocalDateTime by;
 
     /**
      * Constructs a Deadline task with the specified description and deadline.
      *
      * @param description The description of the deadline task.
-     * @param byTime The deadline date and time.
+     * @param by The deadline date and time.
      */
-    public Deadline(String description, LocalDateTime byTime) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        this.byTime = byTime;
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[D]" + super.toString() + " (by: " + byTime.format(outputFormat) + ")";
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return "[D]" + super.toString() + " (by: " + by.format(dateTimeFormat) + ")";
     }
 }

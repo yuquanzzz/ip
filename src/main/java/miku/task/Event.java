@@ -7,27 +7,27 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that occurs during a specific time period.
  */
 public class Event extends Task {
-    private final LocalDateTime fromTime;
-    private final LocalDateTime toTime;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Constructs an Event task with the specified description, start time, and end time.
      *
      * @param description The description of the event task.
-     * @param fromTime The start date and time of the event.
-     * @param toTime The end date and time of the event.
+     * @param from The start date and time of the event.
+     * @param to The end date and time of the event.
      */
-    public Event(String description, LocalDateTime fromTime, LocalDateTime toTime) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
-        this.fromTime = fromTime;
-        this.toTime = toTime;
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[E]" + super.toString()
-                + " (from: " + fromTime.format(outputFormat)
-                + " to: " + toTime.format(outputFormat) + ")";
+                + " (from: " + from.format(dateTimeFormat)
+                + " to: " + to.format(dateTimeFormat) + ")";
     }
 }
