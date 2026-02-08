@@ -83,10 +83,6 @@ public class Miku {
         }
     }
 
-    public String getCommandType() {
-        return commandType;
-    }
-
     /**
      * Returns the welcome banner for GUI.
      */
@@ -111,6 +107,10 @@ public class Miku {
             gui.showError(e.getMessage());
         }
         return gui.getResponse();
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 
     public boolean isExit() {

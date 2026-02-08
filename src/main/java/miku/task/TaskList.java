@@ -32,20 +32,6 @@ public class TaskList implements Serializable {
         return tasks.get(index);
     }
 
-    public List<Task> getTasks() {
-        return Collections.unmodifiableList(tasks); // read-only access for outside methods
-    }
-
-    public int size() {
-        return tasks.size();
-    }
-
-    private void validateTaskIndex(int index) throws MikuException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new MikuException("Task number " + (index + 1) + " does not exist!"); // ui uses 1-based index
-        }
-    }
-
     /**
      * Marks a task as done at the specified index.
      *
@@ -93,5 +79,19 @@ public class TaskList implements Serializable {
             }
         }
         return matchingTasks;
+    }
+
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(tasks); // read-only access for outside methods
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    private void validateTaskIndex(int index) throws MikuException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new MikuException("Task number " + (index + 1) + " does not exist!"); // ui uses 1-based index
+        }
     }
 }

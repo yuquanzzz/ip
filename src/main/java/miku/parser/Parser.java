@@ -110,13 +110,12 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
-        final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            return LocalDateTime.parse(dateTimeString, dateTimeFormat);
-        } catch (DateTimeParseException e) {
-            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
+    private static String parseKeyword(String arguments) throws MikuException {
+        // checks if arguments is empty
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("Please specify a keyword to search for!");
         }
+        return arguments.trim();
     }
 
     private static Task parseTodo(String arguments) throws MikuException {
@@ -125,6 +124,15 @@ public class Parser {
             throw new MikuException("The description cannot be empty!");
         }
         return new Todo(arguments.trim());
+    }
+
+    private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
+        final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(dateTimeString, dateTimeFormat);
+        } catch (DateTimeParseException e) {
+            throw new MikuException("The time cannot be parsed! Use the format yyyy-MM-dd HH:mm");
+        }
     }
 
     private static Deadline parseDeadline(String arguments) throws MikuException {
@@ -190,13 +198,5 @@ public class Parser {
         LocalDateTime fromDateTime = parseDateTime(from);
         LocalDateTime toDateTime = parseDateTime(to);
         return new Event(description, fromDateTime, toDateTime);
-    }
-
-    private static String parseKeyword(String arguments) throws MikuException {
-        // checks if arguments is empty
-        if (arguments == null || arguments.trim().isEmpty()) {
-            throw new MikuException("Please specify a keyword to search for!");
-        }
-        return arguments.trim();
     }
 }

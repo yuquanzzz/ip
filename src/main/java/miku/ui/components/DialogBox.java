@@ -39,6 +39,17 @@ public class DialogBox extends HBox {
         applyCircularClip();
     }
 
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
+    }
+
+    public static DialogBox getMikuDialog(String text, Image img, String commandType) {
+        DialogBox db = new DialogBox(text, img);
+        db.flip();
+        db.changeDialogStyle(commandType);
+        return db;
+    }
+
     private void applyCircularClip() {
         Circle clip = new Circle();
         clip.centerXProperty().bind(displayPicture.fitWidthProperty().divide(2));
@@ -56,10 +67,6 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         dialog.getStyleClass().add("reply-label");
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
     }
 
     private void changeDialogStyle(String commandType) {
@@ -83,12 +90,5 @@ public class DialogBox extends HBox {
         default:
             // Do nothing
         }
-    }
-
-    public static DialogBox getMikuDialog(String text, Image img, String commandType) {
-        DialogBox db = new DialogBox(text, img);
-        db.flip();
-        db.changeDialogStyle(commandType);
-        return db;
     }
 }
