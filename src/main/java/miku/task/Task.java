@@ -9,6 +9,8 @@ import java.io.Serializable;
  * Implements Serializable to allow tasks to be saved to and loaded from storage.
  */
 public abstract class Task implements Serializable {
+    protected static final String DATETIME_FORMAT = "MMM dd yyyy HH:mm";
+
     @Serial
     private static final long serialVersionUID = 1L;
 
