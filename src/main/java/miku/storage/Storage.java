@@ -35,6 +35,7 @@ public class Storage {
      */
     public TaskList loadTaskList() {
         Path path = Paths.get(storageDir, "taskList.ser");
+
         // no existing task list, creating new task list
         if (Files.notExists(path)) {
             return new TaskList();
@@ -70,6 +71,7 @@ public class Storage {
      */
     public void saveTaskList(TaskList taskList) throws MikuException {
         Path path = Paths.get(storageDir, "taskList.ser");
+
         // try to save task list
         saveToStorage(taskList, path);
     }
