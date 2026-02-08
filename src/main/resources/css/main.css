@@ -1,26 +1,46 @@
 .root {
-    main-color: rgb(237, 255, 242);       /* Create a looked-up color called "main-color" within root. */
-    -fx-background-color: main-color;
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-color: rgba(243, 255, 245, 0.75);
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
-    -fx-font: 20px "Arial";
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: #7ecf9a;
+    -fx-border-width: 2;
+    -fx-font: 18px "Arial";
+    -fx-text-fill: #0f3d2d;
+    -fx-prompt-text-fill: #4f7c66;
+    -fx-padding: 10 14 10 14;
+    -fx-effect: dropshadow(gaussian, rgba(28, 107, 73, 0.25), 10, 0.25, 0, 2);
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
-    -fx-font: italic bold 16px "Arial";
+    -fx-background-color: linear-gradient(#9fe0c2, #72cfab);
+    -fx-text-fill: #0f3d2d;
+    -fx-font: 16px "Arial";
+    -fx-font-style: normal;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #1ea89a;
+    -fx-border-width: 2;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(gaussian, rgba(17, 144, 132, 0.45), 10, 0.35, 0, 2);
 }
 
 .button:hover {
-    -fx-background-color:cyan;
-    -fx-font-size: 18px;
+    -fx-background-color: linear-gradient(#74f0dc, #38d2c0);
+    -fx-translate-y: -1;
 }
 
 .button:pressed {
-    -fx-background-color:orange;
-    -fx-font-size: 20px;
+    -fx-background-color: linear-gradient(#38d2c0, #22b7a7);
+    -fx-translate-y: 1;
 }
 
 .scroll-pane,
@@ -30,18 +50,16 @@
 
 .scroll-bar {
     -fx-font-size: 10px;  /* Change width of scroll bar. */
-    -fx-background-color: main-color;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #ff9cb4;
-    -fx-background-radius: 1em;
+    -fx-background-color: linear-gradient(#b7f0d0, #7dddb1);
+    -fx-background-radius: 10;
 }
 
-/* Hides the increment and decrement buttons. */
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
     -fx-pref-height: 0;
     -fx-opacity: 0;
 }
-
