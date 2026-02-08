@@ -5,7 +5,7 @@ import java.util.List;
 import miku.storage.Storage;
 import miku.task.Task;
 import miku.task.TaskList;
-import miku.ui.Ui;
+import miku.ui.TextUi;
 
 /**
  * Represents a command to find tasks by searching for a keyword in the task description.
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) {
         List<Task> matchingTasks = tasks.findTasks(keyword);
         ui.showFindResults(matchingTasks, keyword);
     }

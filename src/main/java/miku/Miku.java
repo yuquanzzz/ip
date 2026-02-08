@@ -7,7 +7,7 @@ import miku.exception.MikuException;
 import miku.parser.Parser;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.Ui;
+import miku.ui.TextUi;
 
 
 /**
@@ -22,7 +22,7 @@ public class Miku {
 
     private final Storage storage;
     private final TaskList tasks;
-    private final Ui ui;
+    private final TextUi ui;
 
     /**
      * Constructs a new Miku chatbot instance.
@@ -33,7 +33,7 @@ public class Miku {
      * @param filePath The file path where tasks are stored and loaded from.
      */
     public Miku(String filePath) {
-        ui = new Ui();
+        ui = new TextUi();
         storage = new Storage(filePath);
         tasks = storage.loadTaskList();
     }

@@ -3,7 +3,7 @@ package miku.command;
 import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.Ui;
+import miku.ui.TextUi;
 
 /**
  * Represents a command to delete a task from the task list.
@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) throws MikuException {
         tasks.deleteTask(index);
         storage.saveTaskList(tasks);
         ui.showTaskDeleted(tasks.getTask(index), tasks.size());

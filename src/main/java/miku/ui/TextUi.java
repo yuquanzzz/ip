@@ -9,14 +9,14 @@ import miku.task.Task;
  * Handles user interface interactions including reading user input
  * and displaying messages to the user.
  */
-public class Ui {
+public class TextUi {
     private static final String LINE = "\t____________________________________________________________";
     private final Scanner scanner;
 
     /**
-     * Constructs an Ui object and initialises the scanner for reading user input.
+     * Constructs a TextUi object and initialises the scanner for reading user input.
      */
-    public Ui() {
+    public TextUi() {
         this.scanner = new Scanner(System.in);
     }
 
