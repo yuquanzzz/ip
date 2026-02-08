@@ -30,9 +30,9 @@ public class GuiMainWindow extends AnchorPane {
     private Miku miku;
 
     private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaUser.png")));
+            this.getClass().getResourceAsStream("/images/Ado.jpg")));
     private final Image mikuImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaDuke.png")));
+            this.getClass().getResourceAsStream("/images/Miku.jpg")));
 
     @FXML
     public void initialize() {
