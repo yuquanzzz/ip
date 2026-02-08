@@ -13,6 +13,8 @@ public abstract class Task implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+    public static final String MARKED_SYMBOL = "[X] ";
+    public static final String UNMARKED_SYMBOL = "[ ] ";
 
     private final String description;
     private boolean isDone;
@@ -46,6 +48,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
+        return (isDone ? MARKED_SYMBOL : UNMARKED_SYMBOL) + description;
     }
 }

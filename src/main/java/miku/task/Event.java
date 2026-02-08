@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that occurs during a specific time period.
  */
 public class Event extends Task {
+    public static final String EVENT_SYMBOL = "[E]";
     private final LocalDateTime from;
     private final LocalDateTime to;
 
@@ -26,7 +27,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
-        return "[E]" + super.toString()
+        return EVENT_SYMBOL + super.toString()
                 + " (from: " + from.format(dateTimeFormat)
                 + " to: " + to.format(dateTimeFormat) + ")";
     }
