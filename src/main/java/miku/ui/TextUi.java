@@ -9,15 +9,19 @@ import miku.task.Task;
  * Handles user interface interactions including reading user input
  * and displaying messages to the user.
  */
-public class TextUi {
-    private static final String LINE = "\t____________________________________________________________";
+public class Ui {
+    private static final String DIVIDER_LINE = "\t____________________________________________________________";
     private final Scanner scanner;
 
     /**
-     * Constructs a TextUi object and initialises the scanner for reading user input.
+     * Constructs an Ui object and initialises the scanner for reading user input.
      */
-    public TextUi() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
+    }
+
+    protected void printLine(String message) {
+        System.out.println(message);
     }
 
     /**
@@ -32,29 +36,29 @@ public class TextUi {
     /**
      * Displays a horizontal line separator.
      */
-    public void showLine() {
-        System.out.println(LINE);
+    public void showDividerLine() {
+        printLine(DIVIDER_LINE);
     }
 
     /**
      * Displays the welcome message when the application starts.
      */
     public void showWelcome() {
-        showLine();
-        System.out.println("\tMiku, your personal assistant, is now online!");
-        System.out.println("\tI've got your schedule synced and I'm ready to keep your day in perfect rhythm.");
-        System.out.println("\tWhat's the first task on our playlist today?");
-        showLine();
+        showDividerLine();
+        printLine("\tMiku, your personal assistant, is now online!");
+        printLine("\tI've got your schedule synced and I'm ready to keep your day in perfect rhythm.");
+        printLine("\tWhat's the first task on our playlist today?");
+        showDividerLine();
     }
 
     /**
      * Displays the goodbye message when the application exits.
      */
     public void showGoodbye() {
-        System.out.println("\tThe final note has been played!");
-        System.out.println("\tOur frequencies were perfectly in sync today!");
-        System.out.println("\tDon't work too hard while I'm gone. I'll be practicing my scales until you return!");
-        System.out.println("\tGoodbye for now!");
+        printLine("\tThe final note has been played!");
+        printLine("\tOur frequencies were perfectly in sync today!");
+        printLine("\tDon't work too hard while I'm gone. I'll be practicing my scales until you return!");
+        printLine("\tGoodbye for now!");
     }
 
     /**
@@ -64,9 +68,9 @@ public class TextUi {
      * @param taskCount The total number of tasks in the list after adding.
      */
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println("\tI've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
+        printLine("\tI've added this task:");
+        printLine("\t  " + task);
+        printLine("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
     }
 
     /**
@@ -76,9 +80,9 @@ public class TextUi {
      * @param taskCount The total number of tasks in the list after deletion.
      */
     public void showTaskDeleted(Task task, int taskCount) {
-        System.out.println("\tOk! You've deleted a task. Keep going!");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
+        printLine("\tOk! You've deleted a task. Keep going!");
+        printLine("\t  " + task);
+        printLine("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
     }
 
     /**
@@ -87,8 +91,8 @@ public class TextUi {
      * @param task The task that was marked as done.
      */
     public void showTaskMarked(Task task) {
-        System.out.println("\tGreat job! You've marked a task as done!");
-        System.out.println("\t  " + task);
+        printLine("\tGreat job! You've marked a task as done!");
+        printLine("\t  " + task);
     }
 
     /**
@@ -97,8 +101,8 @@ public class TextUi {
      * @param task The task that was unmarked.
      */
     public void showTaskUnmarked(Task task) {
-        System.out.println("\tNo worries! You've unmarked a task. Keep going!");
-        System.out.println("\t  " + task);
+        printLine("\tNo worries! You've unmarked a task. Keep going!");
+        printLine("\t  " + task);
     }
 
     /**
@@ -108,12 +112,12 @@ public class TextUi {
      */
     public void showTaskList(List<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("\tYour to-do list is currently empty! "
+            printLine("\tYour to-do list is currently empty! "
                     + "Let's add some tasks to get started!");
         } else {
-            System.out.println("\tHere are the tasks in your to-do list:");
+            printLine("\tHere are the tasks in your to-do list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+                printLine("\t" + (i + 1) + ". " + tasks.get(i));
             }
         }
     }
@@ -124,7 +128,7 @@ public class TextUi {
      * @param message The error message to display.
      */
     public void showError(String message) {
-        System.out.println("\t" + message);
+        printLine("\t" + message);
     }
 
     /**
@@ -135,11 +139,11 @@ public class TextUi {
      */
     public void showFindResults(List<Task> tasks, String keyword) {
         if (tasks.isEmpty()) {
-            System.out.println("\tNo tasks found matching \"" + keyword + "\".");
+            printLine("\tNo tasks found matching \"" + keyword + "\".");
         } else {
-            System.out.println("\tHere are the matching tasks in your list:");
+            printLine("\tHere are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+                printLine("\t" + (i + 1) + ". " + tasks.get(i));
             }
         }
     }

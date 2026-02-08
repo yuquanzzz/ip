@@ -7,7 +7,8 @@ import miku.exception.MikuException;
 import miku.parser.Parser;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.TextUi;
+import miku.ui.Gui;
+import miku.ui.Ui;
 
 
 /**
@@ -22,7 +23,8 @@ public class Miku {
 
     private final Storage storage;
     private final TaskList tasks;
-    private final TextUi ui;
+    private final Ui ui;
+    private boolean isExit;
 
     /**
      * Constructs a new Miku chatbot instance.
@@ -33,9 +35,17 @@ public class Miku {
      * @param filePath The file path where tasks are stored and loaded from.
      */
     public Miku(String filePath) {
-        ui = new TextUi();
+        ui = new Ui();
         storage = new Storage(filePath);
         tasks = storage.loadTaskList();
+        isExit = false;
+    }
+
+    /**
+     * Public accessor for the default storage directory.
+     */
+    public static String getDefaultStorageDir() {
+        return STORAGE_DIR;
     }
 
     /**
@@ -56,19 +66,47 @@ public class Miku {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
+        isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showDividerLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (MikuException e) {
                 ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                ui.showDividerLine();
             }
         }
+    }
+
+    /**
+     * Returns the welcome banner for GUI.
+     */
+    public String getWelcomeMessage() {
+        Gui gui = new Gui();
+        gui.showWelcome();
+        return gui.getResponse();
+    }
+
+    /**
+     * Processes a single user input and returns Miku's response for GUI.
+     */
+    public String getResponse(String input) {
+        Gui gui = new Gui();
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, gui, storage);
+            isExit = command.isExit();
+        } catch (MikuException e) {
+            gui.showError(e.getMessage());
+        }
+        return gui.getResponse();
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }
