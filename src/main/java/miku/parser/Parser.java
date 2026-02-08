@@ -38,29 +38,29 @@ public class Parser {
      */
     public static Command parse(String input) throws MikuException {
         if (input == null || input.trim().isEmpty()) {
-            throw new MikuException("Invalid command, please try again with a valid command.");
+            throw new MikuException("Invalid command, please try again with a valid command!");
         }
         String trimmedInput = input.trim();
         // find first whitespace to split between command and arguments
         int firstSpaceIndex = indexOfWhitespace(trimmedInput);
 
-        String commandWord;
+        String command;
         String arguments;
 
         if (firstSpaceIndex == -1) {
             // whitespace not found, treat entire input as command
-            commandWord = trimmedInput.toLowerCase();
+            command = trimmedInput.toLowerCase();
             arguments = null;
         } else {
             // whitespace found, split input to command and arguments
-            commandWord = trimmedInput.substring(0, firstSpaceIndex).toLowerCase();
+            command = trimmedInput.substring(0, firstSpaceIndex).toLowerCase();
             arguments = trimmedInput.substring(firstSpaceIndex + 1).trim();
             if (arguments.isEmpty()) {
                 arguments = null;
             }
         }
 
-        return switch (commandWord) {
+        return switch (command) {
         case "list" -> new ListCommand();
         case "bye" -> new ByeCommand();
         case "mark" -> new MarkCommand(parseTaskIndex(arguments, "mark"));
@@ -70,7 +70,7 @@ public class Parser {
         case "deadline" -> new AddCommand(parseDeadline(arguments));
         case "event" -> new AddCommand(parseEvent(arguments));
         case "find" -> new FindCommand(parseKeyword(arguments));
-        default -> throw new MikuException("Invalid command, please try again with a valid command.");
+        default -> throw new MikuException("Invalid command, please try again with a valid command!");
         };
     }
 

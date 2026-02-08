@@ -7,6 +7,7 @@ import miku.exception.MikuException;
 import miku.parser.Parser;
 import miku.storage.Storage;
 import miku.task.TaskList;
+import miku.ui.Gui;
 import miku.ui.Ui;
 
 
@@ -23,6 +24,8 @@ public class Miku {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private boolean isExit;
+    private String commandType;
 
     /**
      * Constructs a new Miku chatbot instance.
@@ -36,6 +39,14 @@ public class Miku {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = storage.loadTaskList();
+        isExit = false;
+    }
+
+    /**
+     * Public accessor for the default storage directory.
+     */
+    public static String getDefaultStorageDir() {
+        return STORAGE_DIR;
     }
 
     /**
@@ -56,19 +67,53 @@ public class Miku {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
+        isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showDividerLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (MikuException e) {
                 ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                ui.showDividerLine();
             }
         }
+    }
+
+    public String getCommandType() {
+        return commandType;
+    }
+
+    /**
+     * Returns the welcome banner for GUI.
+     */
+    public String getWelcomeMessage() {
+        Gui gui = new Gui();
+        gui.showWelcome();
+        return gui.getResponse();
+    }
+
+    /**
+     * Processes a single user input and returns Miku's response for GUI.
+     */
+    public String getResponse(String input) {
+        Gui gui = new Gui();
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, gui, storage);
+            commandType = command.getClass().getSimpleName();
+            isExit = command.isExit();
+        } catch (MikuException e) {
+            commandType = e.getClass().getSimpleName();
+            gui.showError(e.getMessage());
+        }
+        return gui.getResponse();
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }

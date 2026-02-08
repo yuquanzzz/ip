@@ -1,0 +1,44 @@
+.label {
+    -fx-background-color: linear-gradient(#bdf4d3, #8be7b7);
+    -fx-border-color: #3aa374;
+    -fx-border-width: 2px;
+    -fx-background-radius: 16 16 6 16;
+    -fx-border-radius: 16 16 6 16;
+    -fx-text-fill: #0f3d2d;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(26, 121, 84, 0.25), 10, 0.25, 0, 2);
+}
+
+.reply-label {
+    -fx-background-color: linear-gradient(#9fe0c2, #72cfab);
+    -fx-background-radius: 16 16 16 6;
+    -fx-border-radius: 16 16 16 6;
+    -fx-border-color: #2f8e63;
+}
+
+.add-label {
+    -fx-background-color: yellow;
+}
+
+.marked-label {
+    -fx-background-color: palegreen;
+}
+
+.delete-label {
+    -fx-background-color: lightpink;
+}
+
+.miku-exception-label {
+    -fx-background-color: salmon;
+}
+
+#displayPicture {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.35, 4, 4);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-rotate: 0;
+    -fx-border-color: #3aa374;
+    -fx-border-width: 2;
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+}

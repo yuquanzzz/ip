@@ -3,7 +3,7 @@ package miku.command;
 import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.Ui;
+import miku.ui.TextUi;
 
 /**
  * Represents a command to exit the application.
@@ -12,7 +12,7 @@ import miku.ui.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) throws MikuException {
         storage.saveTaskList(tasks);
         ui.showGoodbye();
     }

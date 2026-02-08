@@ -4,7 +4,7 @@ import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.Task;
 import miku.task.TaskList;
-import miku.ui.Ui;
+import miku.ui.TextUi;
 
 /**
  * Represents a command to add a task to the task list.
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) throws MikuException {
         tasks.addTask(task);
         storage.saveTaskList(tasks);
         ui.showTaskAdded(task, tasks.size());

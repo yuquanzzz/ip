@@ -2,6 +2,7 @@ package miku.command;
 
 import miku.exception.MikuException;
 import miku.storage.Storage;
+import miku.task.Task;
 import miku.task.TaskList;
 import miku.ui.Ui;
 
@@ -22,8 +23,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+        Task task = tasks.getTask(index);
         tasks.deleteTask(index);
         storage.saveTaskList(tasks);
-        ui.showTaskDeleted(tasks.getTask(index), tasks.size());
+        ui.showTaskDeleted(task, tasks.size());
     }
 }
