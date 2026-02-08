@@ -3,7 +3,7 @@ package miku.command;
 import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.TextUi;
+import miku.ui.Ui;
 
 /**
  * Represents an abstract command that can be executed.
@@ -19,7 +19,7 @@ public abstract class Command {
      * @param storage The storage for persisting task data.
      * @throws MikuException If an error occurs during command execution.
      */
-    public abstract void execute(TaskList tasks, TextUi ui, Storage storage) throws MikuException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException;
 
     /**
      * Checks if this command causes the application to exit.

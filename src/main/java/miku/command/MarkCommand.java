@@ -3,7 +3,7 @@ package miku.command;
 import miku.exception.MikuException;
 import miku.storage.Storage;
 import miku.task.TaskList;
-import miku.ui.TextUi;
+import miku.ui.Ui;
 
 /**
  * Represents a command to mark a task as done.
@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws MikuException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
         tasks.markTask(index);
         storage.saveTaskList(tasks);
         ui.showTaskMarked(tasks.getTask(index));
