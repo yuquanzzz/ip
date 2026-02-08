@@ -38,7 +38,7 @@ public class Parser {
      */
     public static Command parse(String input) throws MikuException {
         if (input == null || input.trim().isEmpty()) {
-            throw new MikuException("Invalid command, please try again with a valid command.");
+            throw new MikuException("Invalid command, please try again with a valid command!");
         }
         String trimmedInput = input.trim();
         // find first whitespace to split between command and arguments
@@ -70,7 +70,7 @@ public class Parser {
         case "deadline" -> new AddCommand(parseDeadline(arguments));
         case "event" -> new AddCommand(parseEvent(arguments));
         case "find" -> new FindCommand(parseKeyword(arguments));
-        default -> throw new MikuException("Invalid command, please try again with a valid command.");
+        default -> throw new MikuException("Invalid command, please try again with a valid command!");
         };
     }
 
