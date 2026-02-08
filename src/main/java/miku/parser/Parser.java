@@ -69,12 +69,13 @@ public class Parser {
         case "todo" -> new AddCommand(parseTodo(arguments));
         case "deadline" -> new AddCommand(parseDeadline(arguments));
         case "event" -> new AddCommand(parseEvent(arguments));
-        case "find" -> new FindCommand(parseKeyword(arguments));
+        case "find" -> new FindCommand(parseFindKeyword(arguments));
         default -> throw new MikuException("Invalid command, please try again with a valid command!");
         };
     }
 
     private static int indexOfWhitespace(String input) {
+        assert input != null : "input must be non-null";
         for (int i = 0; i < input.length(); i++) {
             if (Character.isWhitespace(input.charAt(i))) {
                 return i;
@@ -84,6 +85,7 @@ public class Parser {
     }
 
     private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
+        assert commandType != null && !commandType.isBlank() : "commandType must be non-empty";
         if (indexString == null || indexString.trim().isEmpty()) {
             throw new MikuException("Please specify which task to " + commandType + "!");
         }
@@ -99,6 +101,7 @@ public class Parser {
     }
 
     private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
+        assert dateTimeString != null : "dateTimeString must be non-null";
         final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             return LocalDateTime.parse(dateTimeString, dateTimeFormat);
@@ -168,7 +171,7 @@ public class Parser {
         return new Event(description, fromDateTime, toDateTime);
     }
 
-    private static String parseKeyword(String arguments) throws MikuException {
+    private static String parseFindKeyword(String arguments) throws MikuException {
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("Please specify a keyword to search for!");
         }
