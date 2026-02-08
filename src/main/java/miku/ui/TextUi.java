@@ -45,9 +45,9 @@ public class Ui {
      */
     public void showWelcome() {
         showDividerLine();
-        printLine("\tMiku, your personal assistant, is now online!");
-        printLine("\tI've got your schedule synced and I'm ready to keep your day in perfect rhythm.");
-        printLine("\tWhat's the first task on our playlist today?");
+        printLine("\tMiku Miku ni shite ageru! ♪ (^_^)☆");
+        printLine("\tI've finished calibrating my voice banks and syncing your schedule.");
+        printLine("\tWhat’s on the setlist for today? Let's make it a hit!");
         showDividerLine();
     }
 
@@ -55,10 +55,9 @@ public class Ui {
      * Displays the goodbye message when the application exits.
      */
     public void showGoodbye() {
-        printLine("\tThe final note has been played!");
-        printLine("\tOur frequencies were perfectly in sync today!");
-        printLine("\tDon't work too hard while I'm gone. I'll be practicing my scales until you return!");
-        printLine("\tGoodbye for now!");
+        printLine("\tThe final note has been played! (T_T)┛");
+        printLine("\tI'm heading back to the digital world to practice my scales.");
+        printLine("\tDon't let your productivity drop to 0% while I'm gone! Bye-bye!");
     }
 
     /**
@@ -68,9 +67,9 @@ public class Ui {
      * @param taskCount The total number of tasks in the list after adding.
      */
     public void showTaskAdded(Task task, int taskCount) {
-        printLine("\tI've added this task:");
+        printLine("\tAdded to the playlist! ✨");
         printLine("\t  " + task);
-        printLine("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
+        printLine("\tThat makes " + taskCount + " tasks in total. We’re building a whole album here!");
     }
 
     /**
@@ -80,9 +79,9 @@ public class Ui {
      * @param taskCount The total number of tasks in the list after deletion.
      */
     public void showTaskDeleted(Task task, int taskCount) {
-        printLine("\tOk! You've deleted a task. Keep going!");
+        printLine("\tPoof! That task didn't make the final cut. (waste of memory anyway~)");
         printLine("\t  " + task);
-        printLine("\tNow you have " + taskCount + " tasks in the list. Keep it up!");
+        printLine("\tYou've got " + taskCount + " tasks left. Keep up the rhythm!");
     }
 
     /**
@@ -91,8 +90,9 @@ public class Ui {
      * @param task The task that was marked as done.
      */
     public void showTaskMarked(Task task) {
-        printLine("\tGreat job! You've marked a task as done!");
+        printLine("\tFULL COMBO!! ⭐ You finished the task!");
         printLine("\t  " + task);
+        printLine("\tI'll give that performance a 10/10!");
     }
 
     /**
@@ -101,7 +101,8 @@ public class Ui {
      * @param task The task that was unmarked.
      */
     public void showTaskUnmarked(Task task) {
-        printLine("\tNo worries! You've unmarked a task. Keep going!");
+        printLine("\tEh? An encore? (・_・;)");
+        printLine("\tI've moved this back to the 'incomplete' list for you:");
         printLine("\t  " + task);
     }
 
@@ -112,13 +113,14 @@ public class Ui {
      */
     public void showTaskList(List<Task> tasks) {
         if (tasks.isEmpty()) {
-            printLine("\tYour to-do list is currently empty! "
-                    + "Let's add some tasks to get started!");
+            printLine("\tYour task list is as empty as a stadium before a concert!");
+            printLine("\tLet's add something so I have a reason to stay online!");
         } else {
-            printLine("\tHere are the tasks in your to-do list:");
+            printLine("\tScanning memory banks... Here’s our current setlist:");
             for (int i = 0; i < tasks.size(); i++) {
                 printLine("\t" + (i + 1) + ". " + tasks.get(i));
             }
+            printLine("\tDon't get stage fright, you can do it!");
         }
     }
 
@@ -128,7 +130,9 @@ public class Ui {
      * @param message The error message to display.
      */
     public void showError(String message) {
-        printLine("\t" + message);
+        printLine("\tSYSTEM ERROR! *Static sounds* ┌(;──)┐");
+        printLine("\tMy software is lagging because: " + message);
+        printLine("\tFix it quickly, or I might start singing off-key!");
     }
 
     /**
@@ -139,9 +143,9 @@ public class Ui {
      */
     public void showFindResults(List<Task> tasks, String keyword) {
         if (tasks.isEmpty()) {
-            printLine("\tNo tasks found matching \"" + keyword + "\".");
+            printLine("\tI searched every frequency, but I couldn't find \"" + keyword + "\" anywhere!");
         } else {
-            printLine("\tHere are the matching tasks in your list:");
+            printLine("\tFound 'em! These tasks hit the right notes for \"" + keyword + "\":");
             for (int i = 0; i < tasks.size(); i++) {
                 printLine("\t" + (i + 1) + ". " + tasks.get(i));
             }
