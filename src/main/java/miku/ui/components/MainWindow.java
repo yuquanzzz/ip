@@ -1,4 +1,4 @@
-package miku.ui;
+package miku.ui.components;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import miku.Miku;
 /**
  * Controller for the main GUI window.
  */
-public class GuiMainWindow extends AnchorPane {
+public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -34,16 +34,20 @@ public class GuiMainWindow extends AnchorPane {
     private final Image mikuImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/Miku.jpg")));
 
+    /**
+     * Initialises the UI by auto-scrolling the dialog container and setting the input prompt.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setPromptText("Type here...");
     }
 
     /** Injects the Miku instance and renders the welcome message. */
     public void setMiku(Miku miku) {
         this.miku = miku;
         dialogContainer.getChildren().add(
-                GuiDialogBox.getMikuDialog(miku.getWelcomeMessage(), mikuImage)
+                DialogBox.getMikuDialog(miku.getWelcomeMessage(), mikuImage, null)
         );
     }
 
@@ -57,16 +61,17 @@ public class GuiMainWindow extends AnchorPane {
             return;
         }
         String response = miku.getResponse(input);
+        String commandType = miku.getCommandType();
         dialogContainer.getChildren().addAll(
-                GuiDialogBox.getUserDialog(input, userImage),
-                GuiDialogBox.getMikuDialog(response, mikuImage)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getMikuDialog(response, mikuImage, commandType)
         );
         userInput.clear();
 
         if (miku.isExit()) {
             sendButton.setDisable(true);
             userInput.setDisable(true);
-            PauseTransition delay = new PauseTransition(Duration.seconds(2.0));
+            PauseTransition delay = new PauseTransition(Duration.seconds(3.0));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
