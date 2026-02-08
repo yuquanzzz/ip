@@ -70,7 +70,11 @@ public class Storage {
      */
     public void saveTaskList(TaskList taskList) throws MikuException {
         Path path = Paths.get(storageDir, "taskList.ser");
-        // try to save taskList
+        // try to save task list
+        saveToStorage(taskList, path);
+    }
+
+    private static void saveToStorage(TaskList taskList, Path path) throws MikuException {
         try {
             Files.createDirectories(path.getParent());
             try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(path))) {
