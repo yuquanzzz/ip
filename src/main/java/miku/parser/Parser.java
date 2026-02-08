@@ -55,12 +55,20 @@ public class Parser {
 
     // helper method to split raw input to command and args, with validation checks
     private static ParsedInput splitCommandAndArgs(String input) throws MikuException {
+        // checks if input is empty
         if (input == null || input.trim().isEmpty()) {
             throw new MikuException("Command entered is empty!");
         }
         String trimmedInput = input.trim();
+
         // find first whitespace to split between command and arguments
-        int firstSpaceIndex = indexOfWhitespace(trimmedInput);
+        int firstSpaceIndex = -1;
+        for (int i = 0; i < trimmedInput.length(); i++) {
+            if (Character.isWhitespace(trimmedInput.charAt(i))) {
+                firstSpaceIndex = i;
+                break;
+            }
+        }
 
         String command;
         String arguments;
@@ -81,15 +89,6 @@ public class Parser {
     }
 
     private record ParsedInput(String command, String arguments) {
-    }
-
-    private static int indexOfWhitespace(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            if (Character.isWhitespace(input.charAt(i))) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
