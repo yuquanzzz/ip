@@ -25,6 +25,7 @@ public class Miku {
     private final TaskList tasks;
     private final Ui ui;
     private boolean isExit;
+    private String commandType;
 
     /**
      * Constructs a new Miku chatbot instance.
@@ -82,6 +83,10 @@ public class Miku {
         }
     }
 
+    public String getCommandType() {
+        return commandType;
+    }
+
     /**
      * Returns the welcome banner for GUI.
      */
@@ -99,8 +104,10 @@ public class Miku {
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, gui, storage);
+            commandType = command.getClass().getSimpleName();
             isExit = command.isExit();
         } catch (MikuException e) {
+            commandType = e.getClass().getSimpleName();
             gui.showError(e.getMessage());
         }
         return gui.getResponse();
