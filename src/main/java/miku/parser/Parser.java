@@ -92,6 +92,7 @@ public class Parser {
     }
 
     private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
+        // checks if index is empty
         if (indexString == null || indexString.trim().isEmpty()) {
             throw new MikuException("Please specify which task to " + commandType + "!");
         }
@@ -116,6 +117,7 @@ public class Parser {
     }
 
     private static Task parseTodo(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
@@ -123,19 +125,24 @@ public class Parser {
     }
 
     private static Deadline parseDeadline(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
 
+        // find "/by" parameter and throw exception if not found
         Matcher matcher = DEADLINE_BY.matcher(arguments);
         if (!matcher.find()) {
             throw new MikuException("Please specify the deadline using /by <time>!");
         }
 
+        // find description parameter and throw exception if it is empty
         String description = arguments.substring(0, matcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of a deadline cannot be empty!");
         }
+
+        // find end date time parameter and throw exception if it is empty
         String by = arguments.substring(matcher.end()).trim();
         if (by.isEmpty()) {
             throw new MikuException("The deadline time cannot be empty!");
@@ -145,24 +152,30 @@ public class Parser {
     }
 
     private static Event parseEvent(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
 
+        // find "/from" parameter and throw exception if not found
         Matcher fromMatcher = EVENT_FROM.matcher(arguments);
         if (!fromMatcher.find()) {
             throw new MikuException("Please specify the start time using /from <time>!");
         }
 
+        // find "/to" parameter and throw exception if not found
         Matcher toMatcher = EVENT_TO.matcher(arguments);
         if (!toMatcher.find(fromMatcher.end())) {
             throw new MikuException("Please specify the end time using /to <time>!");
         }
 
+        // find description parameter and throw exception if it is empty
         String description = arguments.substring(0, fromMatcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of an event cannot be empty!");
         }
+
+        // find start and end date time and throw exception if it is empty
         String from = arguments.substring(fromMatcher.end(), toMatcher.start()).trim();
         if (from.isEmpty()) {
             throw new MikuException("The start time cannot be empty!");
@@ -177,6 +190,7 @@ public class Parser {
     }
 
     private static String parseKeyword(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("Please specify a keyword to search for!");
         }
