@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
-        Task task = tasks.getTask(index);
+        Task task = tasks.getTask(index); // get task before deletion to show task deleted in ui
         tasks.deleteTask(index);
         storage.saveTaskList(tasks);
         ui.showTaskDeleted(task, tasks.size());
