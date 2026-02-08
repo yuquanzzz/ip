@@ -2,6 +2,7 @@ package miku.ui;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import miku.task.Task;
 
@@ -117,9 +118,7 @@ public class Ui {
             printLine("\tLet's add something so I have a reason to stay online!");
         } else {
             printLine("\tScanning memory banks... Here’s our current setlist:");
-            for (int i = 0; i < tasks.size(); i++) {
-                printLine("\t" + (i + 1) + ". " + tasks.get(i));
-            }
+            printTasks(tasks);
             printLine("\tDon't get stage fright, you can do it!");
         }
     }
@@ -144,11 +143,14 @@ public class Ui {
     public void showFindResults(List<Task> tasks, String keyword) {
         if (tasks.isEmpty()) {
             printLine("\tI searched every frequency, but I couldn't find \"" + keyword + "\" anywhere!");
-        } else {
-            printLine("\tFound 'em! These tasks hit the right notes for \"" + keyword + "\":");
-            for (int i = 0; i < tasks.size(); i++) {
-                printLine("\t" + (i + 1) + ". " + tasks.get(i));
-            }
         }
+
+        printLine("\tFound 'em! These tasks hit the right notes for \"" + keyword + "\":");
+        printTasks(tasks);
+    }
+
+    private void printTasks(List<Task> tasks) {
+        IntStream.range(0, tasks.size())
+                .forEach(i -> printLine("\t" + (i + 1) + ". " + tasks.get(i)));
     }
 }
