@@ -37,8 +37,26 @@ public class Parser {
      * @throws MikuException If the input is invalid or cannot be parsed.
      */
     public static Command parse(String input) throws MikuException {
+        ParsedInput parsedInput = splitCommandAndArgs(input);
+
+        return switch (parsedInput.command()) {
+        case "list" -> new ListCommand();
+        case "bye" -> new ByeCommand();
+        case "mark" -> new MarkCommand(parseTaskIndex(parsedInput.arguments(), "mark"));
+        case "unmark" -> new UnmarkCommand(parseTaskIndex(parsedInput.arguments(), "unmark"));
+        case "delete" -> new DeleteCommand(parseTaskIndex(parsedInput.arguments(), "delete"));
+        case "todo" -> new AddCommand(parseTodo(parsedInput.arguments()));
+        case "deadline" -> new AddCommand(parseDeadline(parsedInput.arguments()));
+        case "event" -> new AddCommand(parseEvent(parsedInput.arguments()));
+        case "find" -> new FindCommand(parseKeyword(parsedInput.arguments()));
+        default -> throw new MikuException("Invalid command, please try again with a valid command!");
+        };
+    }
+
+    // helper method to split raw input to command and args, with validation checks
+    private static ParsedInput splitCommandAndArgs(String input) throws MikuException {
         if (input == null || input.trim().isEmpty()) {
-            throw new MikuException("Invalid command, please try again with a valid command!");
+            throw new MikuException("Command entered is empty!");
         }
         String trimmedInput = input.trim();
         // find first whitespace to split between command and arguments
@@ -59,19 +77,10 @@ public class Parser {
                 arguments = null;
             }
         }
+        return new ParsedInput(command, arguments);
+    }
 
-        return switch (command) {
-        case "list" -> new ListCommand();
-        case "bye" -> new ByeCommand();
-        case "mark" -> new MarkCommand(parseTaskIndex(arguments, "mark"));
-        case "unmark" -> new UnmarkCommand(parseTaskIndex(arguments, "unmark"));
-        case "delete" -> new DeleteCommand(parseTaskIndex(arguments, "delete"));
-        case "todo" -> new AddCommand(parseTodo(arguments));
-        case "deadline" -> new AddCommand(parseDeadline(arguments));
-        case "event" -> new AddCommand(parseEvent(arguments));
-        case "find" -> new FindCommand(parseKeyword(arguments));
-        default -> throw new MikuException("Invalid command, please try again with a valid command!");
-        };
+    private record ParsedInput(String command, String arguments) {
     }
 
     private static int indexOfWhitespace(String input) {
