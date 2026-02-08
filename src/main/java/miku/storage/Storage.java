@@ -35,15 +35,22 @@ public class Storage {
      */
     public TaskList loadTaskList() {
         Path path = Paths.get(storageDir, "taskList.ser");
-        // no existing taskList, creating new taskList
+        // no existing task list, creating new task list
         if (Files.notExists(path)) {
             return new TaskList();
         }
 
-        // try to load existing taskList
+        // try to load existing task list
+        TaskList loadedObj = loadFromStorage(path);
+
+        // return existing task list if possible, else return a new task list
+        return loadedObj != null ? loadedObj : new TaskList();
+    }
+
+    private static TaskList loadFromStorage(Path path) {
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(path))) {
             Object loadedObj = ois.readObject();
-            // check if serialized object is a taskList
+            // check if serialized object is a task list
             if (loadedObj instanceof TaskList) {
                 return (TaskList) loadedObj;
             }
@@ -51,9 +58,7 @@ public class Storage {
             System.out.println("\tFailed to load existing task list: " + e.getMessage());
             System.out.println("\tCreating new task list instead");
         }
-
-        // failed to load existing taskList, creating new taskList
-        return new TaskList();
+        return null;
     }
 
     /**
