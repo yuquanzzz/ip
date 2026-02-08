@@ -73,13 +73,9 @@ public class TaskList implements Serializable {
      */
     public List<Task> findTasks(String keyword) {
         assert keyword != null : "keyword must be non-null";
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
     }
 
     public List<Task> getTasks() {
