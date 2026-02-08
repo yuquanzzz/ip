@@ -37,15 +37,23 @@ public class Storage {
     public TaskList loadTaskList() {
         assert storageDir != null && !storageDir.isBlank() : "storageDir must be non-empty";
         Path path = Paths.get(storageDir, "taskList.ser");
-        // no existing taskList, creating new taskList
+
+        // no existing task list, creating new task list
         if (Files.notExists(path)) {
             return new TaskList();
         }
 
-        // try to load existing taskList
+        // try to load existing task list
+        TaskList loadedObj = loadFromStorage(path);
+
+        // return existing task list if possible, else return a new task list
+        return loadedObj != null ? loadedObj : new TaskList();
+    }
+
+    private static TaskList loadFromStorage(Path path) {
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(path))) {
             Object loadedObj = ois.readObject();
-            // check if serialized object is a taskList
+            // check if serialized object is a task list
             if (loadedObj instanceof TaskList) {
                 return (TaskList) loadedObj;
             }
@@ -53,9 +61,7 @@ public class Storage {
             System.out.println("\tFailed to load existing task list: " + e.getMessage());
             System.out.println("\tCreating new task list instead");
         }
-
-        // failed to load existing taskList, creating new taskList
-        return new TaskList();
+        return null;
     }
 
     /**
@@ -68,7 +74,12 @@ public class Storage {
     public void saveTaskList(TaskList taskList) throws MikuException {
         assert taskList != null : "taskList must be non-null";
         Path path = Paths.get(storageDir, "taskList.ser");
-        // try to save taskList
+
+        // try to save task list
+        saveToStorage(taskList, path);
+    }
+
+    private static void saveToStorage(TaskList taskList, Path path) throws MikuException {
         try {
             assert path.getParent() != null : "storage path must have a parent";
             Files.createDirectories(path.getParent());

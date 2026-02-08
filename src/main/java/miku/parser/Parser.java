@@ -37,12 +37,41 @@ public class Parser {
      * @throws MikuException If the input is invalid or cannot be parsed.
      */
     public static Command parse(String input) throws MikuException {
+        ParsedInput parsedInput = splitCommandAndArgs(input);
+
+        return switch (parsedInput.command()) {
+        case "list" -> new ListCommand();
+        case "bye" -> new ByeCommand();
+        case "find" -> new FindCommand(parseKeyword(parsedInput.arguments()));
+        // task action
+        case "mark" -> new MarkCommand(parseTaskIndex(parsedInput.arguments(), "mark"));
+        case "unmark" -> new UnmarkCommand(parseTaskIndex(parsedInput.arguments(), "unmark"));
+        case "delete" -> new DeleteCommand(parseTaskIndex(parsedInput.arguments(), "delete"));
+        // task
+        case "todo" -> new AddCommand(parseTodo(parsedInput.arguments()));
+        case "deadline" -> new AddCommand(parseDeadline(parsedInput.arguments()));
+        case "event" -> new AddCommand(parseEvent(parsedInput.arguments()));
+        // invalid command
+        default -> throw new MikuException("Invalid command, please try again with a valid command!");
+        };
+    }
+
+    // helper method to split raw input to command and args, with validation checks
+    private static ParsedInput splitCommandAndArgs(String input) throws MikuException {
+        // checks if input is empty
         if (input == null || input.trim().isEmpty()) {
-            throw new MikuException("Invalid command, please try again with a valid command!");
+            throw new MikuException("Command entered is empty!");
         }
         String trimmedInput = input.trim();
+
         // find first whitespace to split between command and arguments
-        int firstSpaceIndex = indexOfWhitespace(trimmedInput);
+        int firstSpaceIndex = -1;
+        for (int i = 0; i < trimmedInput.length(); i++) {
+            if (Character.isWhitespace(trimmedInput.charAt(i))) {
+                firstSpaceIndex = i;
+                break;
+            }
+        }
 
         String command;
         String arguments;
@@ -59,33 +88,14 @@ public class Parser {
                 arguments = null;
             }
         }
-
-        return switch (command) {
-        case "list" -> new ListCommand();
-        case "bye" -> new ByeCommand();
-        case "mark" -> new MarkCommand(parseTaskIndex(arguments, "mark"));
-        case "unmark" -> new UnmarkCommand(parseTaskIndex(arguments, "unmark"));
-        case "delete" -> new DeleteCommand(parseTaskIndex(arguments, "delete"));
-        case "todo" -> new AddCommand(parseTodo(arguments));
-        case "deadline" -> new AddCommand(parseDeadline(arguments));
-        case "event" -> new AddCommand(parseEvent(arguments));
-        case "find" -> new FindCommand(parseFindKeyword(arguments));
-        default -> throw new MikuException("Invalid command, please try again with a valid command!");
-        };
+        return new ParsedInput(command, arguments);
     }
 
-    private static int indexOfWhitespace(String input) {
-        assert input != null : "input must be non-null";
-        for (int i = 0; i < input.length(); i++) {
-            if (Character.isWhitespace(input.charAt(i))) {
-                return i;
-            }
-        }
-        return -1;
+    private record ParsedInput(String command, String arguments) {
     }
 
     private static int parseTaskIndex(String indexString, String commandType) throws MikuException {
-        assert commandType != null && !commandType.isBlank() : "commandType must be non-empty";
+        // checks if index is empty
         if (indexString == null || indexString.trim().isEmpty()) {
             throw new MikuException("Please specify which task to " + commandType + "!");
         }
@@ -100,8 +110,23 @@ public class Parser {
         }
     }
 
+    private static String parseKeyword(String arguments) throws MikuException {
+        // checks if arguments is empty
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("Please specify a keyword to search for!");
+        }
+        return arguments.trim();
+    }
+
+    private static Task parseTodo(String arguments) throws MikuException {
+        // checks if arguments is empty
+        if (arguments == null || arguments.trim().isEmpty()) {
+            throw new MikuException("The description cannot be empty!");
+        }
+        return new Todo(arguments.trim());
+    }
+
     private static LocalDateTime parseDateTime(String dateTimeString) throws MikuException {
-        assert dateTimeString != null : "dateTimeString must be non-null";
         final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             return LocalDateTime.parse(dateTimeString, dateTimeFormat);
@@ -110,27 +135,25 @@ public class Parser {
         }
     }
 
-    private static Task parseTodo(String arguments) throws MikuException {
-        if (arguments == null || arguments.trim().isEmpty()) {
-            throw new MikuException("The description cannot be empty!");
-        }
-        return new Todo(arguments.trim());
-    }
-
     private static Deadline parseDeadline(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
 
+        // find "/by" parameter and throw exception if not found
         Matcher matcher = DEADLINE_BY.matcher(arguments);
         if (!matcher.find()) {
             throw new MikuException("Please specify the deadline using /by <time>!");
         }
 
+        // find description parameter and throw exception if it is empty
         String description = arguments.substring(0, matcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of a deadline cannot be empty!");
         }
+
+        // find end date time parameter and throw exception if it is empty
         String by = arguments.substring(matcher.end()).trim();
         if (by.isEmpty()) {
             throw new MikuException("The deadline time cannot be empty!");
@@ -140,24 +163,30 @@ public class Parser {
     }
 
     private static Event parseEvent(String arguments) throws MikuException {
+        // checks if arguments is empty
         if (arguments == null || arguments.trim().isEmpty()) {
             throw new MikuException("The description cannot be empty!");
         }
 
+        // find "/from" parameter and throw exception if not found
         Matcher fromMatcher = EVENT_FROM.matcher(arguments);
         if (!fromMatcher.find()) {
             throw new MikuException("Please specify the start time using /from <time>!");
         }
 
+        // find "/to" parameter and throw exception if not found
         Matcher toMatcher = EVENT_TO.matcher(arguments);
         if (!toMatcher.find(fromMatcher.end())) {
             throw new MikuException("Please specify the end time using /to <time>!");
         }
 
+        // find description parameter and throw exception if it is empty
         String description = arguments.substring(0, fromMatcher.start()).trim();
         if (description.isEmpty()) {
             throw new MikuException("The description of an event cannot be empty!");
         }
+
+        // find start and end date time and throw exception if it is empty
         String from = arguments.substring(fromMatcher.end(), toMatcher.start()).trim();
         if (from.isEmpty()) {
             throw new MikuException("The start time cannot be empty!");
@@ -169,12 +198,5 @@ public class Parser {
         LocalDateTime fromDateTime = parseDateTime(from);
         LocalDateTime toDateTime = parseDateTime(to);
         return new Event(description, fromDateTime, toDateTime);
-    }
-
-    private static String parseFindKeyword(String arguments) throws MikuException {
-        if (arguments == null || arguments.trim().isEmpty()) {
-            throw new MikuException("Please specify a keyword to search for!");
-        }
-        return arguments.trim();
     }
 }

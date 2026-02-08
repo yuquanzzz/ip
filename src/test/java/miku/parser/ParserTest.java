@@ -93,7 +93,7 @@ class ParserTest {
     @Test
     void parse_emptyInput_exceptionThrown() {
         MikuException exception = assertThrows(MikuException.class, () -> Parser.parse("   "));
-        assertEquals("Invalid command, please try again with a valid command!", exception.getMessage());
+        assertEquals("Command entered is empty!", exception.getMessage());
     }
 
     @Test

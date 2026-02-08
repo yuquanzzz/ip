@@ -28,24 +28,8 @@ public class TaskList implements Serializable {
     }
 
     public Task getTask(int index) throws MikuException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new MikuException("Task number " + (index + 1) + " does not exist!");
-        }
+        validateTaskIndex(index);
         return tasks.get(index);
-    }
-
-    public List<Task> getTasks() {
-        return Collections.unmodifiableList(tasks); // read-only access for outside methods
-    }
-
-    public int size() {
-        return tasks.size();
-    }
-
-    private void validateTaskIndex(int index) throws MikuException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new MikuException("Task number " + (index + 1) + " does not exist!");
-        }
     }
 
     /**
@@ -92,5 +76,19 @@ public class TaskList implements Serializable {
         return tasks.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .toList();
+    }
+
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(tasks); // read-only access for outside methods
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    private void validateTaskIndex(int index) throws MikuException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new MikuException("Task number " + (index + 1) + " does not exist!"); // ui uses 1-based index
+        }
     }
 }

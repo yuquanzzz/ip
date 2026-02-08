@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
         assert tasks != null : "tasks must be non-null";
         assert ui != null : "ui must be non-null";
         assert storage != null : "storage must be non-null";
-        Task task = tasks.getTask(index);
+        Task task = tasks.getTask(index); // get task before deletion to show task deleted in ui
         tasks.deleteTask(index);
         storage.saveTaskList(tasks);
         ui.showTaskDeleted(task, tasks.size());

@@ -9,6 +9,10 @@ import java.io.Serializable;
  * Implements Serializable to allow tasks to be saved to and loaded from storage.
  */
 public abstract class Task implements Serializable {
+    public static final String DATETIME_FORMAT = "MMM dd yyyy HH:mm";
+    public static final String MARKED_SYMBOL = "[X] ";
+    public static final String UNMARKED_SYMBOL = "[ ] ";
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -44,6 +48,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
+        return (isDone ? MARKED_SYMBOL : UNMARKED_SYMBOL) + description;
     }
 }
