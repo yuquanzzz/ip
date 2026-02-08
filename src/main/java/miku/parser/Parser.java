@@ -42,13 +42,16 @@ public class Parser {
         return switch (parsedInput.command()) {
         case "list" -> new ListCommand();
         case "bye" -> new ByeCommand();
+        case "find" -> new FindCommand(parseKeyword(parsedInput.arguments()));
+        // task action
         case "mark" -> new MarkCommand(parseTaskIndex(parsedInput.arguments(), "mark"));
         case "unmark" -> new UnmarkCommand(parseTaskIndex(parsedInput.arguments(), "unmark"));
         case "delete" -> new DeleteCommand(parseTaskIndex(parsedInput.arguments(), "delete"));
+        // task
         case "todo" -> new AddCommand(parseTodo(parsedInput.arguments()));
         case "deadline" -> new AddCommand(parseDeadline(parsedInput.arguments()));
         case "event" -> new AddCommand(parseEvent(parsedInput.arguments()));
-        case "find" -> new FindCommand(parseKeyword(parsedInput.arguments()));
+        // invalid command
         default -> throw new MikuException("Invalid command, please try again with a valid command!");
         };
     }
