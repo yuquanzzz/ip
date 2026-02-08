@@ -44,23 +44,23 @@ public class Parser {
         // find first whitespace to split between command and arguments
         int firstSpaceIndex = indexOfWhitespace(trimmedInput);
 
-        String commandWord;
+        String command;
         String arguments;
 
         if (firstSpaceIndex == -1) {
             // whitespace not found, treat entire input as command
-            commandWord = trimmedInput.toLowerCase();
+            command = trimmedInput.toLowerCase();
             arguments = null;
         } else {
             // whitespace found, split input to command and arguments
-            commandWord = trimmedInput.substring(0, firstSpaceIndex).toLowerCase();
+            command = trimmedInput.substring(0, firstSpaceIndex).toLowerCase();
             arguments = trimmedInput.substring(firstSpaceIndex + 1).trim();
             if (arguments.isEmpty()) {
                 arguments = null;
             }
         }
 
-        return switch (commandWord) {
+        return switch (command) {
         case "list" -> new ListCommand();
         case "bye" -> new ByeCommand();
         case "mark" -> new MarkCommand(parseTaskIndex(arguments, "mark"));
