@@ -23,6 +23,7 @@ public class Storage {
      * @param storageDir The directory path where task data will be stored.
      */
     public Storage(String storageDir) {
+        assert storageDir != null && !storageDir.isBlank() : "storageDir must be non-empty";
         this.storageDir = storageDir;
     }
 
@@ -34,6 +35,7 @@ public class Storage {
      * @return The loaded TaskList, or a new empty TaskList if loading fails.
      */
     public TaskList loadTaskList() {
+        assert storageDir != null && !storageDir.isBlank() : "storageDir must be non-empty";
         Path path = Paths.get(storageDir, "taskList.ser");
 
         // no existing task list, creating new task list
@@ -70,6 +72,7 @@ public class Storage {
      * @throws MikuException If task list cannot be saved
      */
     public void saveTaskList(TaskList taskList) throws MikuException {
+        assert taskList != null : "taskList must be non-null";
         Path path = Paths.get(storageDir, "taskList.ser");
 
         // try to save task list
@@ -78,6 +81,7 @@ public class Storage {
 
     private static void saveToStorage(TaskList taskList, Path path) throws MikuException {
         try {
+            assert path.getParent() != null : "storage path must have a parent";
             Files.createDirectories(path.getParent());
             try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(path))) {
                 oos.writeObject(taskList);

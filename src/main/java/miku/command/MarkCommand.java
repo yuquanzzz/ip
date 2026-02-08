@@ -22,6 +22,9 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+        assert tasks != null : "tasks must be non-null";
+        assert ui != null : "ui must be non-null";
+        assert storage != null : "storage must be non-null";
         tasks.markTask(index);
         storage.saveTaskList(tasks);
         ui.showTaskMarked(tasks.getTask(index));
