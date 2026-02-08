@@ -23,6 +23,9 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MikuException {
+        assert tasks != null : "tasks must be non-null";
+        assert ui != null : "ui must be non-null";
+        assert storage != null : "storage must be non-null";
         tasks.addTask(task);
         storage.saveTaskList(tasks);
         ui.showTaskAdded(task, tasks.size());
