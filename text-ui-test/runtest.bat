@@ -7,7 +7,7 @@ REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac -cp ..\src\main\java -Xlint:none -d ..\bin ^
+javac -encoding UTF-8 -cp ..\src\main\java -Xlint:none -d ..\bin ^
   ..\src\main\java\miku\*.java ^
   ..\src\main\java\miku\command\*.java ^
   ..\src\main\java\miku\exception\*.java ^
@@ -26,4 +26,3 @@ java -classpath ..\bin Miku < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
-
