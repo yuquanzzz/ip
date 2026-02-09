@@ -1,150 +1,205 @@
 	____________________________________________________________
-	Miku, your personal assistant, is now online!
-	I've got your schedule synced and I'm ready to keep your day in perfect rhythm.
-	What's the first task on our playlist today?
+	Miku Miku ni shite ageru! ♪ (^_^)☆
+	I've finished calibrating my voice banks and syncing your schedule.
+	What’s on the setlist for today? Let's make it a hit!
 	____________________________________________________________
 	____________________________________________________________
-	Your to-do list is currently empty! Let's add some tasks to get started!
+	Your task list is as empty as a stadium before a concert!
+	Let's add something so I have a reason to stay online!
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
+	Added to the playlist! ✨
 	  [T][ ] read book
-	Now you have 1 tasks in the list. Keep it up!
+	That makes 1 tasks in total. We’re building a whole album here!
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
+	Added to the playlist! ✨
 	  [T][ ] return book
-	Now you have 2 tasks in the list. Keep it up!
+	That makes 2 tasks in total. We’re building a whole album here!
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
+	Added to the playlist! ✨
 	  [D][ ] submit report (by: Jan 30 2026 12:00)
-	Now you have 3 tasks in the list. Keep it up!
+	That makes 3 tasks in total. We’re building a whole album here!
 	____________________________________________________________
 	____________________________________________________________
-	I've added this task:
+	Added to the playlist! ✨
 	  [E][ ] project meeting (from: Jan 30 2026 12:00 to: Jan 30 2026 22:00)
-	Now you have 4 tasks in the list. Keep it up!
+	That makes 4 tasks in total. We’re building a whole album here!
 	____________________________________________________________
 	____________________________________________________________
-	Here are the tasks in your to-do list:
+	Scanning memory banks... Here’s our current setlist:
 	1. [T][ ] read book
 	2. [T][ ] return book
 	3. [D][ ] submit report (by: Jan 30 2026 12:00)
 	4. [E][ ] project meeting (from: Jan 30 2026 12:00 to: Jan 30 2026 22:00)
+	Don't get stage fright, you can do it!
 	____________________________________________________________
 	____________________________________________________________
-	Great job! You've marked a task as done!
+	FULL COMBO!! ⭐ You finished the task!
 	  [T][X] read book
+	I'll give that performance a 10/10!
 	____________________________________________________________
 	____________________________________________________________
-	Great job! You've marked a task as done!
+	FULL COMBO!! ⭐ You finished the task!
 	  [T][X] return book
+	I'll give that performance a 10/10!
 	____________________________________________________________
 	____________________________________________________________
-	Here are the tasks in your to-do list:
+	Scanning memory banks... Here’s our current setlist:
 	1. [T][X] read book
 	2. [T][X] return book
 	3. [D][ ] submit report (by: Jan 30 2026 12:00)
 	4. [E][ ] project meeting (from: Jan 30 2026 12:00 to: Jan 30 2026 22:00)
+	Don't get stage fright, you can do it!
 	____________________________________________________________
 	____________________________________________________________
-	No worries! You've unmarked a task. Keep going!
+	Eh? An encore? (・_・;)
+	I've moved this back to the 'incomplete' list for you:
 	  [T][ ] read book
 	____________________________________________________________
 	____________________________________________________________
-	Here are the tasks in your to-do list:
+	Scanning memory banks... Here’s our current setlist:
 	1. [T][ ] read book
 	2. [T][X] return book
 	3. [D][ ] submit report (by: Jan 30 2026 12:00)
 	4. [E][ ] project meeting (from: Jan 30 2026 12:00 to: Jan 30 2026 22:00)
+	Don't get stage fright, you can do it!
 	____________________________________________________________
 	____________________________________________________________
-	Ok! You've deleted a task. Keep going!
+	Poof! That task didn't make the final cut. (waste of memory anyway~)
 	  [T][ ] read book
-	Now you have 3 tasks in the list. Keep it up!
+	You've got 3 tasks left. Keep up the rhythm!
 	____________________________________________________________
 	____________________________________________________________
-	Here are the tasks in your to-do list:
+	Scanning memory banks... Here’s our current setlist:
 	1. [T][X] return book
 	2. [D][ ] submit report (by: Jan 30 2026 12:00)
 	3. [E][ ] project meeting (from: Jan 30 2026 12:00 to: Jan 30 2026 22:00)
+	Don't get stage fright, you can do it!
 	____________________________________________________________
 	____________________________________________________________
-	The description cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The description cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The description cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The description cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify the deadline using /by <time>!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify the deadline using /by <time>!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The description of a deadline cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The description of a deadline cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The deadline time cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The deadline time cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The description cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The description cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify the start time using /from <time>!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify the start time using /from <time>!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify the end time using /to <time>!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify the end time using /to <time>!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The description of an event cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The description of an event cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The start time cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The start time cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The end time cannot be empty!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The end time cannot be empty!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: The time cannot be parsed! Use the format yyyy-MM-dd HH:mm
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify which task to mark!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify which task to mark!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify which task to unmark!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify which task to unmark!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number must be a positive number!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number must be a positive number!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number must be a positive number!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number must be a positive number!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number 999 does not exist!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number 999 does not exist!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number 999 does not exist!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number 999 does not exist!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	I'm sorry, I didn't quite catch that command. Please try again with a valid command.
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Invalid command, please try again with a valid command!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Please specify which task to delete!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Please specify which task to delete!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number must be a positive number!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number must be a positive number!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	Task number 4 does not exist!
+	SYSTEM ERROR! *Static sounds* ┌(;──)┐
+	My software is lagging because: Task number 4 does not exist!
+	Fix it quickly, or I might start singing off-key!
 	____________________________________________________________
 	____________________________________________________________
-	The final note has been played!
-	Our frequencies were perfectly in sync today!
-	Don't work too hard while I'm gone. I'll be practicing my scales until you return!
-	Goodbye for now!
+	The final note has been played! (T_T)┛
+	I'm heading back to the digital world to practice my scales.
+	Don't let your productivity drop to 0% while I'm gone! Bye-bye!
 	____________________________________________________________
