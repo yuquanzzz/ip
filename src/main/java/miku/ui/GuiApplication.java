@@ -17,6 +17,8 @@ import miku.ui.components.MainWindow;
  */
 public class GuiApplication extends Application {
 
+    public static final String APP_NAME = "Miku";
+    public static final String BOT_ICON = "/images/Miku.jpg";
     private final Miku miku = new Miku(Miku.getDefaultStorageDir());
 
     @Override
@@ -28,9 +30,9 @@ public class GuiApplication extends Application {
 
             // set icon and title
             Image icon = new Image(Objects.requireNonNull(
-                    this.getClass().getResourceAsStream("/images/Miku.jpg")));
+                    this.getClass().getResourceAsStream(BOT_ICON)));
             stage.getIcons().add(icon);
-            stage.setTitle("Miku");
+            stage.setTitle(APP_NAME);
 
             FXMLLoader fxmlLoader = new FXMLLoader(GuiApplication.class.getResource("/view/MainWindow.fxml"));
             AnchorPane root = fxmlLoader.load();

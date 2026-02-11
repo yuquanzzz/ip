@@ -18,6 +18,8 @@ import miku.Miku;
  * Controller for the main GUI window.
  */
 public class MainWindow extends AnchorPane {
+    public static final String BOT_ICON = "/images/Miku.jpg";
+    public static final String USER_ICON = "/images/Ado.jpg";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -29,10 +31,10 @@ public class MainWindow extends AnchorPane {
 
     private Miku miku;
 
-    private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/Ado.jpg")));
     private final Image mikuImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/Miku.jpg")));
+            this.getClass().getResourceAsStream(BOT_ICON)));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream(USER_ICON)));
 
     /**
      * Initialises the UI by auto-scrolling the dialog container and setting the input prompt.
