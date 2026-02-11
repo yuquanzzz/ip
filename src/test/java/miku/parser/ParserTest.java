@@ -33,9 +33,12 @@ class ParserTest {
 
     @ParameterizedTest
     @CsvSource({
-        "mark 1, miku.command.MarkCommand",
-        "unmark 1, miku.command.UnmarkCommand",
-        "delete 1, miku.command.DeleteCommand"
+        "'mark 1', miku.command.MarkCommand",
+        "'mark 1, 3-4, 6, 2', miku.command.MarkCommand",
+        "'unmark 1', miku.command.UnmarkCommand",
+        "'unmark 2-3', miku.command.UnmarkCommand",
+        "'delete 1', miku.command.DeleteCommand",
+        "'delete 1, 3-4, 6, 2', miku.command.DeleteCommand"
     })
     void parse_indexBasedCommandWithValidIndex_returnsCorrectCommand(String input, String expectedClass)
             throws MikuException {
@@ -151,7 +154,14 @@ class ParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"mark abc", "unmark abc", "delete abc"})
+    @ValueSource(strings = {
+        "mark abc",
+        "unmark abc",
+        "delete abc",
+        "mark 1, abc",
+        "delete 2-abc",
+        "mark 2--3"
+    })
     void parse_indexBasedCommandWithNonNumericIndex_exceptionThrown(String input) {
         MikuException exception = assertThrows(MikuException.class, () -> Parser.parse(input));
         assertEquals("Please provide a valid task number!", exception.getMessage());
@@ -165,9 +175,16 @@ class ParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"mark 0", "unmark 0", "delete 0"})
+    @ValueSource(strings = {"mark 0", "unmark 0", "delete 0", "delete 0-2"})
     void parse_indexBasedCommandWithZero_exceptionThrown(String input) {
         MikuException exception = assertThrows(MikuException.class, () -> Parser.parse(input));
         assertEquals("Task number must be a positive number!", exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"mark 4-2", "unmark 3-1", "delete 5-4"})
+    void parse_indexBasedCommandWithDescendingRange_exceptionThrown(String input) {
+        MikuException exception = assertThrows(MikuException.class, () -> Parser.parse(input));
+        assertEquals("Invalid range! Please provide a valid task number!", exception.getMessage());
     }
 }

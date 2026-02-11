@@ -76,35 +76,41 @@ public class Ui {
     /**
      * Displays a confirmation message when a task is deleted.
      *
-     * @param task The task that was deleted.
+     * @param tasks     The tasks that were deleted.
      * @param taskCount The total number of tasks in the list after deletion.
      */
-    public void showTaskDeleted(Task task, int taskCount) {
+    public void showTasksDeleted(List<Task> tasks, int taskCount) {
         printLine("\tPoof! That task didn't make the final cut. (waste of memory anyway~)");
-        printLine("\t  " + task);
+        for (Task task : tasks) {
+            printLine("\t" + task);
+        }
         printLine("\tYou've got " + taskCount + " tasks left. Keep up the rhythm!");
     }
 
     /**
-     * Displays a confirmation message when a task is marked as done.
+     * Displays a confirmation message when tasks are marked as done.
      *
-     * @param task The task that was marked as done.
+     * @param tasks The tasks that were marked as done.
      */
-    public void showTaskMarked(Task task) {
-        printLine("\tFULL COMBO!! ⭐ You finished the task!");
-        printLine("\t  " + task);
+    public void showTasksMarked(List<Task> tasks) {
+        printLine("\tFULL COMBO!! ⭐ You finished the tasks!");
+        for (Task task : tasks) {
+            printLine("\t" + task);
+        }
         printLine("\tI'll give that performance a 10/10!");
     }
 
     /**
      * Displays a confirmation message when a task is unmarked (marked as not done).
      *
-     * @param task The task that was unmarked.
+     * @param tasks The tasks that were unmarked.
      */
-    public void showTaskUnmarked(Task task) {
+    public void showTasksUnmarked(List<Task> tasks) {
         printLine("\tEh? An encore? (・_・;)");
-        printLine("\tI've moved this back to the 'incomplete' list for you:");
-        printLine("\t  " + task);
+        printLine("\tI've moved these back to the 'incomplete' list for you:");
+        for (Task task : tasks) {
+            printLine("\t" + task);
+        }
     }
 
     /**
