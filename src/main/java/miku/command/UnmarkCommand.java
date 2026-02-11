@@ -1,7 +1,11 @@
 package miku.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import miku.exception.MikuException;
 import miku.storage.Storage;
+import miku.task.Task;
 import miku.task.TaskList;
 import miku.ui.Ui;
 
@@ -9,15 +13,15 @@ import miku.ui.Ui;
  * Represents a command to unmark a task as not done.
  */
 public class UnmarkCommand extends Command {
-    private final int index;
+    private final List<Integer> indexes;
 
     /**
-     * Constructs an UnmarkCommand with the specified task index.
+     * Constructs an UnmarkCommand with the specified task indexes.
      *
-     * @param index The index of the task to be unmarked (0-based).
+     * @param indexes The indexes of the tasks to be unmarked (0-based).
      */
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public UnmarkCommand(List<Integer> indexes) {
+        this.indexes = List.copyOf(indexes);
     }
 
     @Override
@@ -25,8 +29,15 @@ public class UnmarkCommand extends Command {
         assert tasks != null : "tasks must be non-null";
         assert ui != null : "ui must be non-null";
         assert storage != null : "storage must be non-null";
-        tasks.unmarkTask(index);
+
+        List<Task> unmarkedTasks = new ArrayList<>();
+        // iterate through indexes and unmark each task
+        for (int index : indexes) {
+            Task task = tasks.getTask(index);
+            tasks.unmarkTask(index);
+            unmarkedTasks.add(task);
+        }
+        ui.showTasksUnmarked(unmarkedTasks);
         storage.saveTaskList(tasks);
-        ui.showTaskUnmarked(tasks.getTask(index));
     }
 }
