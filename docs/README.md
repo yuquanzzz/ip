@@ -108,14 +108,14 @@ Tasks are saved automatically to `~/.miku/taskList.ser` after each command that 
 
 ## Command summary
 
-Action | Format, Examples
----|---
-Add todo | `todo DESCRIPTION` e.g., `todo read book`
-Add deadline | `deadline DESCRIPTION /by yyyy-MM-dd HH:mm` e.g., `deadline submit report /by 2026-01-30 12:00`
-Add event | `event DESCRIPTION /from yyyy-MM-dd HH:mm /to yyyy-MM-dd HH:mm` e.g., `event project meeting /from 2026-01-30 12:00 /to 2026-01-30 22:00`
-List | `list`
-Mark | `mark INDEXES` e.g., `mark 1`, `mark 1, 3`, `mark 2-4`
-Unmark | `unmark INDEXES` e.g., `unmark 1`, `unmark 1, 3`, `unmark 2-4`
-Delete | `delete INDEXES` e.g., `delete 2`, `delete 1, 3`, `delete 2-4`
-Find | `find KEYWORD` e.g., `find report`
-Exit | `bye`
+| Action       | Format, Examples                                                                                                                          |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| Add todo     | `todo DESCRIPTION` e.g., `todo read book`                                                                                                 |
+| Add deadline | `deadline DESCRIPTION /by yyyy-MM-dd HH:mm` e.g., `deadline submit report /by 2026-01-30 12:00`                                           |
+| Add event    | `event DESCRIPTION /from yyyy-MM-dd HH:mm /to yyyy-MM-dd HH:mm` e.g., `event project meeting /from 2026-01-30 12:00 /to 2026-01-30 22:00` |
+| List         | `list`                                                                                                                                    |
+| Mark         | `mark INDEXES` e.g., `mark 1`, `mark 1, 3`, `mark 2-4`                                                                                    |
+| Unmark       | `unmark INDEXES` e.g., `unmark 1`, `unmark 1, 3`, `unmark 2-4`                                                                            |
+| Delete       | `delete INDEXES` e.g., `delete 2`, `delete 1, 3`, `delete 2-4`                                                                            |
+| Find         | `find KEYWORD` e.g., `find report`                                                                                                        |
+| Exit         | `bye`                                                                                                                                     |
