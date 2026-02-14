@@ -42,9 +42,6 @@ public class Miku {
         isExit = false;
     }
 
-    /**
-     * Public accessor for the default storage directory.
-     */
     public static String getDefaultStorageDir() {
         return STORAGE_DIR;
     }
