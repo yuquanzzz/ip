@@ -11,11 +11,12 @@ AI was used in the development of this project through **GitHub Copilot**, utili
 
 ## Tasks Completed with AI Assistance
 
-| Task | Description |
-|------|-------------|
-| **Level-7** | Saving task list to hard disk using `java.io.Serializable` |
-| **A-MoreOOP** | Refactoring project to extract closely related code into classes |
-| **A-JUnit** | Adding tests for `Parser` and `Storage` classes |
-| **A-JavaDoc** | Adding documentation to classes and methods |
-| **Level-10** | CSS and JavaFX modifications for the GUI |
-| **A-Assertions** | Adding assertions to methods |
+| Task             | Description                                             |
+|------------------|---------------------------------------------------------|
+| **Level-7**      | Save task list to hard disk with `java.io.Serializable` |
+| **A-MoreOOP**    | Extract closely related code into classes               |
+| **A-JUnit**      | Generate JUnit tests for `Parser` and `Storage` classes |
+| **A-JavaDoc**    | JavaDocs for classes and methods                        |
+| **Level-10**     | CSS and JavaFX modifications for the GUI                |
+| **A-Assertions** | Add assertions to methods                               |
+| **A-UserGuide**  | Add and modify User Guide                               |                                           |
