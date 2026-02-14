@@ -2,7 +2,7 @@
 
 Miku is a task-focused chatbot that helps you track todos, deadlines, and events in a fast, command-driven workflow.
 
-![Ui](Ui.png)
+<img src="Ui.png" width="400"  alt="Miku GUI"/>
 
 ## Quick start
 
